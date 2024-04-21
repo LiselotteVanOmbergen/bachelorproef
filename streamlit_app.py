@@ -25,17 +25,9 @@ def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, act
 
         # Definieer de vraag voor het maaltijdplan
         question = f"Stel een plantaardig dagelijks maaltijdplan op dat voldoet aan de voedingsbehoeften van een {gender} van {age} jaar, {weight} kilo, {height} cm, met een activiteitsniveau van {activity_level} en als doel {goal}. De totale voedingswaarden stemmen overeen met de voedingsbehoeften. Het plan is gedetailleerd en bevat minstens ontbijt, lunch, snacks en diner en eventueel dessert."
+        answer = ''.join([gen.text.strip() for generation in model.generate([question]) for gen in generation])
 
-        # Definieer het systeemprompt en de prompttemplate voor de chat-sessie
-        system_prompt = "### Je bent een voedingscoach die plantaardige maaltijdplannen opstelt."
-        prompt_template = '### User:\n{0}\n\n### Response:\n'
-
-        # Start een chat-sessie met het GPT-4-model
-        with model.chat_session(system_prompt=system_prompt, prompt_template=prompt_template):
-            # Genereer een reactie op basis van de vraag
-            response = model.generate(question)
-
-        return response
+        return answer
 
     except Exception as e:
         return f"Een fout is opgetreden: {str(e)}"
