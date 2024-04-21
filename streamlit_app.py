@@ -1,7 +1,12 @@
 import streamlit as st
-#import os
-#import openai
+import os
+import openai
 from langchain_community.llms import GPT4All
+from openai import OpenAI
+import os
+
+
+openai.api_key = os.getenv(st.secrets["OPENAI_API_KEY"])
 
 
 st.title("Vegan maaltijplangenerator")
@@ -9,25 +14,19 @@ st.title("Vegan maaltijplangenerator")
 
 def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, activity_level = 'gemiddeld', goal = '0.5 kilo per week afvallen'):
     try:
-        # Initialiseer het GPT-4-model
-        model = GPT4All(
-            model="mistral-7b-instruct-v0.1.Q4_0.gguf",
-            max_tokens=300,
-            n_threads=4,
-            temp=0.3,
-            top_p=0.2,
-            top_k=40,
-            n_batch=8,
-            seed=100,
-            allow_download=False,
-            verbose=True
-        )
+        user_template = f"Stel een plantaardig dagelijks maaltijdplan op dat voldoet aan de voedingsbehoeften van {gender} van {leeftijd} jaar, {gewicht} kilo, {lengte} cm, met een activiteitsniveau van {activiteitsniveau} en als doel {doel}. De totale voedingswaarden stemmen overeen met de voedingsbehoeften. Het plan is gedetailleerd en gebaseerd op de verstrekte JSON-structuur: {JSON_data} en bevat minstens ontbijt, lunch, snacks en diner en eventueel dessert."
 
-        # Definieer de vraag voor het maaltijdplan
-        question = f"Stel een plantaardig dagelijks maaltijdplan op dat voldoet aan de voedingsbehoeften van een {gender} van {age} jaar, {weight} kilo, {height} cm, met een activiteitsniveau van {activity_level} en als doel {goal}. De totale voedingswaarden stemmen overeen met de voedingsbehoeften. Het plan is gedetailleerd en bevat minstens ontbijt, lunch, snacks en diner en eventueel dessert."
-        
+        completion = openai.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+        {"role": "system", "content": "Je bent een voedingscoach die plantaardige maaltijdplannen opstelt."},
+        {"role": "user", "content": user_template}
+    ]
+)
 
-        return (model.generate([question]))
+   
+
+        return completion.choices[0].message.content.replace('\\n', '\n')
 
     except Exception as e:
         return f"Een fout is opgetreden: {str(e)}"
