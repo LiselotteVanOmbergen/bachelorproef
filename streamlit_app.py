@@ -2,7 +2,7 @@ import streamlit as st
 #import os
 #import openai
 from langchain_community.llms import GPT4All
-from langchain import ChatPromptTemplate, LLMChain, SystemMessage, HumanMessage
+
 
 st.title("Vegan maaltijplangenerator")
 
