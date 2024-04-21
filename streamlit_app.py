@@ -14,7 +14,7 @@ st.title("Vegan maaltijplangenerator")
 
 def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, activity_level = 'gemiddeld', goal = '0.5 kilo per week afvallen'):
     try:
-        user_template = f"Stel een plantaardig dagelijks maaltijdplan op dat voldoet aan de voedingsbehoeften van {gender} van {leeftijd} jaar, {gewicht} kilo, {lengte} cm, met een activiteitsniveau van {activiteitsniveau} en als doel {doel}. De totale voedingswaarden stemmen overeen met de voedingsbehoeften. Het plan is gedetailleerd en gebaseerd op de verstrekte JSON-structuur: {JSON_data} en bevat minstens ontbijt, lunch, snacks en diner en eventueel dessert."
+        user_template = f"Stel een plantaardig dagelijks maaltijdplan op dat voldoet aan de voedingsbehoeften van een {gender} van {age} jaar, {weight} kilo, {height} cm, met een {activity_level} activiteitsniveau en als doel {goal}. De totale voedingswaarden stemmen overeen met de voedingsbehoeften. Het plan is gedetailleerd en gebaseerd op de verstrekte JSON-structuur: {JSON_data} en bevat minstens ontbijt, lunch, snacks en diner en eventueel dessert."
 
         completion = openai.chat.completions.create(
         model="gpt-3.5-turbo",
