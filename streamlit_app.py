@@ -45,7 +45,7 @@ age = st.number_input('Leeftijd', min_value=1, max_value=100, value=30, step=1)
 height = st.number_input('Lengte (cm)', min_value=1,
                          max_value=220, value=170, step=1)
 weight = st.number_input('Gewicht (kg)', min_value=1,
-                         max_value=500, value=70, step=0.1)
+                         max_value=500, value=70, step=1)
 activity_level = st.selectbox('Activiteitsniveau', [
                               'Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'])
 goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
