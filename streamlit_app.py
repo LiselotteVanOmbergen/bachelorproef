@@ -19,15 +19,15 @@ def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, act
             top_k=40,
             n_batch=8,
             seed=100,
-            allow_download=True,
+            allow_download=False,
             verbose=True
         )
 
         # Definieer de vraag voor het maaltijdplan
         question = f"Stel een plantaardig dagelijks maaltijdplan op dat voldoet aan de voedingsbehoeften van een {gender} van {age} jaar, {weight} kilo, {height} cm, met een activiteitsniveau van {activity_level} en als doel {goal}. De totale voedingswaarden stemmen overeen met de voedingsbehoeften. Het plan is gedetailleerd en bevat minstens ontbijt, lunch, snacks en diner en eventueel dessert."
-        answer = ''.join([gen.text.strip() for generation in model.generate([question]) for gen in generation])
+        
 
-        return answer
+        return (model.generate([question]))
 
     except Exception as e:
         return f"Een fout is opgetreden: {str(e)}"
