@@ -12,9 +12,7 @@ from langchain.retrievers.multi_query import MultiQueryRetriever
 from loader import load_pdf
 
 def genereer_motivatie():
-   return ("test")
-   
-def rag_motivatie(key):  
+
     onderwerpen = [
         "Gezondheid",
         "Milieubewustzijn",
