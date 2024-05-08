@@ -11,7 +11,7 @@ from langchain.retrievers.multi_query import MultiQueryRetriever
 
 from loader import load_pdf
 
-def genereer_motivatie():
+def genereer_motivatie(key):
 
     onderwerpen = [
         "Gezondheid",
