@@ -96,7 +96,7 @@ def generate_motivation():
     #Data
     files_paths = []
     files_paths.append('https://github.com/LiselotteVanOmbergen/bachelorproef/tree/5aef3c55d707fa97e2426c8e5f7272494619d8b7/RAG_motivatie/vegan_diet2.pdf')
-    files_paths.append('https://github.com/LiselotteVanOmbergen/bachelorproef/tree/5aef3c55d707fa97e2426c8e5f7272494619d8b7/RAG_motivatiesustainability.pdf') 
+    files_paths.append('https://github.com/LiselotteVanOmbergen/bachelorproef/tree/5aef3c55d707fa97e2426c8e5f7272494619d8b7/RAG_motivatie/sustainability.pdf') 
     #Document loader
     documents_motivatie = []
     for pdf_path in files_paths:
