@@ -52,4 +52,4 @@ if st.button('Genereer Maaltijdplan'):
    
 
 
-st.write(genereer_motivatie())
+st.write(genereer_motivatie(openai.api_key))
