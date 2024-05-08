@@ -32,15 +32,11 @@ def genereer_motivatie(key):
     #RAG
     #Data
     
-    
-
-    #Text Splitter
-    documents_motivatie = load_pdf().load_and_split()
-
+  
     #Embeddings
     embeddings_model = OpenAIEmbeddings(api_key= key)
     # Vectorstores
-    vectorstore_motivatie = LanceDB.from_documents(documents_motivatie, embeddings_model)
+    vectorstore_motivatie = LanceDB.from_documents(load_pdf(), embeddings_model)
 
 
 

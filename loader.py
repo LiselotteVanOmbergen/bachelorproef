@@ -24,6 +24,6 @@ def load_pdf(data_dir="./data/motivatie"):
     for path in paths:
         print(f"Loading {path}")
         loader = PyPDFLoader(path)
-        pdfs.extend(loader.load())
+        pdfs.extend(loader.load_and_split())
     return pdfs
 
