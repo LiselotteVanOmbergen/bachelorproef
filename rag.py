@@ -3,7 +3,7 @@ import random
 import openai
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import LanceDB
+from langchain_community.vectorstores import faiss
 from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
@@ -36,7 +36,7 @@ def genereer_motivatie(key):
     #Embeddings
     embeddings_model = OpenAIEmbeddings(api_key= key)
     # Vectorstores
-    vectorstore_motivatie = LanceDB.from_documents(load_pdf(), embeddings_model)
+    vectorstore_motivatie = faiss.from_documents(load_pdf(), embeddings_model)
 
 
 
