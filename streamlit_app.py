@@ -6,6 +6,7 @@ import openai
 import os
 
 from langchain_community.document_loaders import PyPDFLoader #, DataFrameLoader
+from langchain_community.document_loaders import OnlinePDFLoader
 import pandas as pd
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai.embeddings import OpenAIEmbeddings
@@ -72,7 +73,6 @@ if st.button('Genereer Maaltijdplan'):
 
 
 
-
 import random
 def generate_motivation():
      
@@ -94,14 +94,20 @@ def generate_motivation():
 
     #RAG
     #Data
+    doc_url = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10550159/pdf/pone.0291791.pdf"
+
+    loader = OnlinePDFLoader(doc_url)
+    
+    
     files_paths = []
+    
     files_paths.append('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10550159/pdf/pone.0291791.pdf')
     #files_paths.append('https://github.com/LiselotteVanOmbergen/bachelorproef/RAG_motivatie/sustainability.pdf') 
     #Document loader
-    documents_motivatie = []
-    for pdf_path in files_paths:
-            loader = PyPDFLoader(pdf_path)
-            documents_motivatie.extend(loader.load())
+    #documents_motivatie = []
+    #for pdf_path in files_paths:
+            #loader = PyPDFLoader(pdf_path)
+            #documents_motivatie.extend(loader.load())
 
 
     #Text Splitter
