@@ -11,7 +11,7 @@ from langchain.retrievers.multi_query import MultiQueryRetriever
 
 from loader import load_pdf
 
-def genereer_motivatie():
+def genereer_motivatie(key):
     onderwerpen = [
         "Gezondheid",
         "Milieubewustzijn",
@@ -37,7 +37,7 @@ def genereer_motivatie():
     documents_motivatie = load_pdf().load_and_split()
 
     #Embeddings
-    embeddings_model = OpenAIEmbeddings(api_key= openai.api_key)
+    embeddings_model = OpenAIEmbeddings(api_key= key)
     # Vectorstores
     vectorstore_motivatie = LanceDB.from_documents(documents_motivatie, embeddings_model)
 
@@ -67,7 +67,7 @@ def genereer_motivatie():
 
     rag_chain_from_pages = (
         RunnablePassthrough.assign(context=(lambda x: format_docs(x["context"])))
-        |  prompt
+        | prompt
         | llm
         | StrOutputParser()
     )
