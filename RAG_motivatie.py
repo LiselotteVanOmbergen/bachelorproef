@@ -31,7 +31,7 @@ def genereer_motivatie():
     #RAG
     #Data
     
-
+    
 
     #Text Splitter
     documents_motivatie = load_pdf().load_and_split()
