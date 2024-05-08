@@ -5,7 +5,7 @@ import openai
 
 import os
 
-from langchain_community.document_loaders import PyPDFLoader#, DataFrameLoader
+from langchain_community.document_loaders import PyPDFLoader #, DataFrameLoader
 import pandas as pd
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai.embeddings import OpenAIEmbeddings
