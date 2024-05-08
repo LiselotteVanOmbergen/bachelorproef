@@ -154,3 +154,4 @@ def generate_motivation():
 
 
 st.sidebar.markdown(generate_motivation())
+st.write(generate_motivation())
