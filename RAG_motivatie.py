@@ -1,15 +1,6 @@
+
 import random
-import streamlit as st
-import os
 import openai
-from pathlib import Path
-
-
-import os
-
-from langchain_community.document_loaders import PyPDFLoader #, DataFrameLoader
-from langchain_community.document_loaders import OnlinePDFLoader
-import pandas as pd
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import LanceDB
@@ -23,21 +14,7 @@ from langchain_core.output_parsers import StrOutputParser
 #from langchain.retrievers.self_query.base import SelfQueryRetriever
 from langchain.retrievers.multi_query import MultiQueryRetriever
 #from langchain.chains.query_constructor.base import AttributeInfo
-
-def list_pdf(data_dir="./data/motivatie"):
-    paths = Path(data_dir).glob('**/*.pdf')
-    for path in paths:
-        yield str(path)
-
-
-def load_pdf(data_dir="./data/motivatie"):
-    pdfs = []
-    paths = list_pdf(data_dir)
-    for path in paths:
-        print(f"Loading {path}")
-        loader = PyPDFLoader(path)
-        pdfs.extend(loader.load())
-    return pdfs
+from loader import load_pdf
 
 def generate_motivation():
      
@@ -63,7 +40,7 @@ def generate_motivation():
 
 
     #Text Splitter
-    documents_motivatie = load_pdf.load_and_split()
+    documents_motivatie = load_pdf().load_and_split()
 
     #Embeddings
     embeddings_model = OpenAIEmbeddings(api_key= openai.api_key)

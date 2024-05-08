@@ -5,23 +5,9 @@ import openai
 
 import os
 
-from langchain_community.document_loaders import PyPDFLoader #, DataFrameLoader
-from langchain_community.document_loaders import OnlinePDFLoader
-import pandas as pd
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import LanceDB
-from langchain_openai import ChatOpenAI
-from langchain_core.runnables import (
-   # RunnableParallel,
-   # RunnableLambda,
-    RunnablePassthrough
-)
-from langchain_core.output_parsers import StrOutputParser
-#from langchain.retrievers.self_query.base import SelfQueryRetriever
-from langchain.retrievers.multi_query import MultiQueryRetriever
-#from langchain.chains.query_constructor.base import AttributeInfo
-from RAG_motivatie import generate_motivation
+
+
+from rag_motivatie import generate_motivation
 
 
 openai.api_key = os.getenv(st.secrets["OPENAI_API_KEY"])
@@ -71,7 +57,6 @@ if st.button('Genereer Maaltijdplan'):
         gender, age, height, weight, activity_level, goal))
 
    
-
 
 
 
