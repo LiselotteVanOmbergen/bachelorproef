@@ -2,24 +2,24 @@ import streamlit as st
 import os
 import openai
 
-from openai import OpenAI
+
 import os
-from openai import OpenAI
-from langchain_community.document_loaders import PyPDFLoader, DataFrameLoader
+
+from langchain_community.document_loaders import PyPDFLoader#, DataFrameLoader
 import pandas as pd
-from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, #PromptTemplate
 from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma, FAISS, LanceDB
+from langchain_community.vectorstores import LanceDB
 from langchain_openai import ChatOpenAI
 from langchain_core.runnables import (
-    RunnableParallel,
-    RunnableLambda,
+   # RunnableParallel,
+   # RunnableLambda,
     RunnablePassthrough
 )
 from langchain_core.output_parsers import StrOutputParser
-from langchain.retrievers.self_query.base import SelfQueryRetriever
+#from langchain.retrievers.self_query.base import SelfQueryRetriever
 from langchain.retrievers.multi_query import MultiQueryRetriever
-from langchain.chains.query_constructor.base import AttributeInfo
+#from langchain.chains.query_constructor.base import AttributeInfo
 
 
 openai.api_key = os.getenv(st.secrets["OPENAI_API_KEY"])
@@ -106,7 +106,7 @@ def generate_motivation():
 
 
     #Text Splitter
-    documents_benefits = loader.load_and_split()
+    documents_motivatie = loader.load_and_split()
 
     #Embeddings
     embeddings_model = OpenAIEmbeddings(api_key= openai.api_key)
@@ -117,7 +117,7 @@ def generate_motivation():
 
     llm = ChatOpenAI(openai_api_key= openai.api_key, temperature=0)
     retriever_motivatie = vectorstore_motivatie.as_retriever(search_type="similarity", search_kwargs={"k": 4})
-    retriever_from_llm = MultiQueryRetriever.from_llm(
+    retriever_motivatie= MultiQueryRetriever.from_llm(
     retriever=retriever_motivatie, llm=llm
 )
 
