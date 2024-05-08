@@ -95,8 +95,8 @@ def generate_motivation():
     #RAG
     #Data
     files_paths = []
-    files_paths.append('https://github.com/LiselotteVanOmbergen/bachelorproef/RAG_motivatie/vegan_diet2.pdf')
-    files_paths.append('https://github.com/LiselotteVanOmbergen/bachelorproef/RAG_motivatie/sustainability.pdf') 
+    files_paths.append('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10550159/pdf/pone.0291791.pdf')
+    #files_paths.append('https://github.com/LiselotteVanOmbergen/bachelorproef/RAG_motivatie/sustainability.pdf') 
     #Document loader
     documents_motivatie = []
     for pdf_path in files_paths:
