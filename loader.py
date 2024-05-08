@@ -25,6 +25,5 @@ def load_pdf(data_dir="./data/motivatie"):
         print(f"Loading {path}")
         loader = PyPDFLoader(path)
         pdfs.extend(loader.load())
-        print(pdfs)
     return pdfs
 
