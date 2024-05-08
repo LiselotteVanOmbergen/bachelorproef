@@ -5,15 +5,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import LanceDB
 from langchain_openai import ChatOpenAI
-from langchain_core.runnables import (
-   # RunnableParallel,
-   # RunnableLambda,
-    RunnablePassthrough
-)
+from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-#from langchain.retrievers.self_query.base import SelfQueryRetriever
 from langchain.retrievers.multi_query import MultiQueryRetriever
-#from langchain.chains.query_constructor.base import AttributeInfo
+
 from loader import load_pdf
 
 def generate_motivation():
