@@ -33,7 +33,7 @@ def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, act
     except Exception as e:
         return f"Een fout is opgetreden: {str(e)}"
 
-
+st.set_page_config(layout="wide")
 col1, col2 = st.columns(2)
 
     # Maaltijdplan genereren en weergeven in de eerste kolom
@@ -62,13 +62,5 @@ with col1:
 with col2:
         st.subheader('')
         st.write(generate_motivation())
-# Knop om maaltijdplan te genereren
-if st.button('Genereer Maaltijdplan'):
-    # Genereer maaltijdplan op basis van gebruikersinvoer
-    st.header('Jouw Maaltijdplan')
-    st.write(generate_meal_plan(
-        gender, age, height, weight, activity_level, goal))
 
    
-
-st.sidebar.write(generate_motivation())
