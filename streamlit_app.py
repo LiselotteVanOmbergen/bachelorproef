@@ -34,12 +34,13 @@ with col1:
                     '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
         
     # Knop om maaltijdplan te genereren
-        if st.button('Genereer maaltijdplan'):
-            st.header('Jouw maaltijdplan')
-            mealplan =(generate_mealplan(gender, age, height , weight, activity_level, goal))
-            st.text(dict_to_text(json.loads(mealplan)))
-            st.download_button("Download maaltijdplan", mealplan)
+if st.button('Genereer maaltijdplan'):
+    st.header('Jouw maaltijdplan')
+    mealplan =(generate_mealplan(gender, age, height , weight, activity_level, goal))
+    st.text(dict_to_text(json.loads(mealplan)))
+    st.download_button("Download maaltijdplan", mealplan)
             # Genereer maaltijdplan op basis van gebruikersinvoer
+with col2:
             st.header('Boodschappenlijst')
             boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
             st.text(boodschappenlijst)
