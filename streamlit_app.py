@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 
-st.title("Vegan maaltijdplangenerator :seedling:")
+st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 col1, col2 = st.columns(2)
 
@@ -41,7 +41,7 @@ with col1:
             st.write(dict_to_text(json.loads(mealplan)))
             # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Boodschappenlijst')
-            st.json((generate_shopping_list_dict(mealplan)))
+            st.json((generate_shopping_list_dict(json.loads(mealplan))))
     # Motivatie genereren en weergeven in de tweede kolom
 
         
