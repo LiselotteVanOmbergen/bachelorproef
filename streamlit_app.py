@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 import openai
-
+import json
 from rag_motivation import generate_motivation
 from rag_mealplan import generate_mealplan
 from dict_to_text import dict_to_text
@@ -37,8 +37,7 @@ with col1:
         if st.button('Genereer Maaltijdplan'):
             st.header('Jouw Maaltijdplan')
             mealplan =(generate_mealplan(gender, age, height , weight, activity_level, goal))
-            st.write(mealplan)
-            #st.write(dict_to_text(mealplan))
+            st.write(dict_to_text(json.loads(mealplan)))
             # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Boodschappenlijst')
             st.write(print_shopping_list(generate_shopping_list_dict(mealplan)))
