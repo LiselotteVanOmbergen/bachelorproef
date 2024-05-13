@@ -15,14 +15,14 @@ openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 
-st.subheader(':earth_africa:')
-st.write(generate_motivation())
+
 col1, col2 = st.columns(2)
     # Maaltijdplan genereren en weergeven in de eerste kolom
 
 
 with col1:
-        
+        st.subheader(':earth_africa:')
+        st.write(generate_motivation())
         gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
         age = st.number_input('Leeftijd', min_value=1, max_value=100, value=30, step=1)
         height = st.number_input('Lengte (cm)', min_value=1,
