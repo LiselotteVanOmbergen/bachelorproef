@@ -38,7 +38,7 @@ with col1:
             st.header('Jouw maaltijdplan')
             mealplan =(generate_mealplan(gender, age, height , weight, activity_level, goal))
             st.text(dict_to_text(json.loads(mealplan)))
-            st.download_button("Download boodschappenlijst", mealplan)
+            st.download_button("Download maaltijdplan", mealplan)
             # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Boodschappenlijst')
             boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
