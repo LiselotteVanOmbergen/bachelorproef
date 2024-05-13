@@ -11,6 +11,7 @@ from langchain.retrievers.self_query.base import SelfQueryRetriever
 import streamlit as st
 import os
 from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import LanceDB
 from langchain_core.runnables import RunnableParallel
 from pathlib import Path
 
@@ -166,7 +167,7 @@ def generate_mealplan():
     embeddings_model = OpenAIEmbeddings(model = "text-embedding-3-small")
 
     # Vectorstores
-    vectorstore_mealplan = FAISS.from_documents(recipes, embeddings_model)
+    vectorstore_mealplan = LanceDB.from_documents(recipes, embeddings_model)
     import random
     def random_num():
         id_list = []
