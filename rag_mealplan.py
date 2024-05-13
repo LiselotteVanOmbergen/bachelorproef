@@ -3,7 +3,6 @@ import pandas as pd
 import openai
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_community.vectorstores import LanceDB
 from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
@@ -150,11 +149,15 @@ voorbeeld_maaltijdplan = {
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 def generate_mealplan():
-    
-    path = Path("./data/recipes").glob('**/*.csv')
-    df = pd.read_csv(path)
-    df = df.rename(columns={'Unnamed: 0': 'id'})
 
+    df = pd.DataFrame()
+    paths = Path("./data/recipes").glob('**/*.csv')
+    for path in paths:
+        temp_df = pd.read_csv(filepath_or_buffer=str(path))
+        temp_df = temp_df.rename(columns={'Unnamed: 0': 'id'})
+    df = pd.concat([df, temp_df], ignore_index=True)
+        
+    
     #Document loader
     loader = DataFrameLoader(df, page_content_column="ingredients")
     recipes = loader.load()
@@ -226,3 +229,5 @@ def generate_mealplan():
     answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
     answer = rag_chain_with_source.invoke(f"(Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {voorbeeld_voedingswaarden}")
     return answer["answer"]
+
+generate_mealplan()
