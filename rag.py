@@ -39,7 +39,7 @@ def genereer_motivatie():
     
   
     #Embeddings
-    embeddings_model = OpenAIEmbeddings(api_key= openai.api_key)
+    embeddings_model = OpenAIEmbeddings()
     # Vectorstores
     pdfs = load_pdf()
     vectorstore_motivatie = LanceDB.from_documents(pdfs, embeddings_model)
