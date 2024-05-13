@@ -51,12 +51,14 @@ with col1:
                     '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
         st.subheader('Jouw Maaltijdplan')
-       # Knop om maaltijdplan te genereren
+        st.write(generate_mealplan())
+       
+"""      # Knop om maaltijdplan te genereren
         if st.button('Genereer Maaltijdplan'):
-    # Genereer maaltijdplan op basis van gebruikersinvoer
+            # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Jouw Maaltijdplan')
-            #st.write(generate_meal_plan(gender, age, height, weight, activity_level, goal))
-            st.wrirte(generate_mealplan())
+            # st.write(generate_meal_plan(gender, age, height, weight, activity_level, goal))
+ """
     # Motivatie genereren en weergeven in de tweede kolom
 with col2:
         st.subheader('')
