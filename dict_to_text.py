@@ -1,5 +1,6 @@
 def dict_to_text(dictionary, indent=0):
     text = ""
+    key = key.capitalize()
     for key, value in dictionary.items():
         if isinstance(value, dict):
             text += "  " * indent + f"{key}:\n"
