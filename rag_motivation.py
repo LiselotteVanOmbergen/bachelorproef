@@ -10,7 +10,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain.retrievers.multi_query import MultiQueryRetriever
 import streamlit as st
 import os
-
+from pathlib import Path
 from loader import load_pdf
 
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))

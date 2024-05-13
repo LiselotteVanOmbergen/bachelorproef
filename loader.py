@@ -1,6 +1,7 @@
 
 from pathlib import Path
 from langchain_community.document_loaders import PyPDFLoader 
+from langchain_community.document_loaders import DataFrameLoader
 
 def list_pdf(data_dir="./data/motivation"):
     paths = Path(data_dir).glob('**/*.pdf')

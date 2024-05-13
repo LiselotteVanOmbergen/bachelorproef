@@ -3,7 +3,7 @@ import os
 import openai
 
 from rag_motivation import generate_motivation
-
+from rag_mealplan import generate_mealplan
 st.set_page_config(layout="wide")
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
@@ -55,9 +55,8 @@ with col1:
         if st.button('Genereer Maaltijdplan'):
     # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Jouw Maaltijdplan')
-            st.write(generate_meal_plan(
-        gender, age, height, weight, activity_level, goal))
-
+            #st.write(generate_meal_plan(gender, age, height, weight, activity_level, goal))
+            st.wrirte(generate_mealplan)
     # Motivatie genereren en weergeven in de tweede kolom
 with col2:
         st.subheader('')
