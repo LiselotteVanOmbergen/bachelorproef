@@ -33,17 +33,35 @@ def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, act
     except Exception as e:
         return f"Een fout is opgetreden: {str(e)}"
 
-gender = st.selectbox('Geslacht', ['Man', 'Vrouw', 'Non-binair persoon'])
-age = st.number_input('Leeftijd', min_value=1, max_value=100, value=30, step=1)
-height = st.number_input('Lengte (cm)', min_value=1,
+
+col1, col2 = st.columns(2)
+
+    # Maaltijdplan genereren en weergeven in de eerste kolom
+with col1:
+        
+        gender = st.selectbox('Geslacht', ['Man', 'Vrouw', 'Non-binair persoon'])
+        age = st.number_input('Leeftijd', min_value=1, max_value=100, value=30, step=1)
+        height = st.number_input('Lengte (cm)', min_value=1,
                          max_value=220, value=170, step=1)
-weight = st.number_input('Gewicht (kg)', min_value=1,
+        weight = st.number_input('Gewicht (kg)', min_value=1,
                          max_value=500, value=70, step=1)
-activity_level = st.selectbox('Activiteitsniveau', [
+        activity_level = st.selectbox('Activiteitsniveau', [
                               'Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'])
-goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
+        goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                     '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
+        st.subheader('Jouw Maaltijdplan')
+       # Knop om maaltijdplan te genereren
+        if st.button('Genereer Maaltijdplan'):
+    # Genereer maaltijdplan op basis van gebruikersinvoer
+            st.header('Jouw Maaltijdplan')
+            st.write(generate_meal_plan(
+        gender, age, height, weight, activity_level, goal))
+
+    # Motivatie genereren en weergeven in de tweede kolom
+with col2:
+        st.subheader('')
+        st.write(generate_motivation())
 # Knop om maaltijdplan te genereren
 if st.button('Genereer Maaltijdplan'):
     # Genereer maaltijdplan op basis van gebruikersinvoer
@@ -52,6 +70,5 @@ if st.button('Genereer Maaltijdplan'):
         gender, age, height, weight, activity_level, goal))
 
    
-
 
 st.sidebar.write(generate_motivation())
