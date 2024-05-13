@@ -38,10 +38,11 @@ with col1:
             st.header('Jouw Maaltijdplan')
             mealplan =(generate_mealplan(gender, age, height , weight, activity_level, goal))
             st.json(mealplan)
-            st.write(dict_to_text(json.loads(mealplan)))
+            st.text(dict_to_text(json.loads(mealplan)))
             # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Boodschappenlijst')
             st.json((generate_shopping_list_dict(json.loads(mealplan))))
+            
     # Motivatie genereren en weergeven in de tweede kolom
 
         
