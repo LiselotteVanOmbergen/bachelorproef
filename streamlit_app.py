@@ -4,7 +4,7 @@ import openai
 
 from rag_motivation import generate_motivation
 
-
+st.set_page_config(layout="wide")
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 
@@ -33,7 +33,7 @@ def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, act
     except Exception as e:
         return f"Een fout is opgetreden: {str(e)}"
 
-st.set_page_config(layout="wide")
+
 col1, col2 = st.columns(2)
 
     # Maaltijdplan genereren en weergeven in de eerste kolom
