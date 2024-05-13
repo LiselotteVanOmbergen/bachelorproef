@@ -15,9 +15,9 @@ from loader import load_pdf
 
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
-def genereer_motivatie():
+def generate_motivation():
 
-    onderwerpen = [
+    subjects = [
         "Gezondheid",
         "Milieubewustzijn",
         "Dierenwelzijn",
@@ -29,26 +29,23 @@ def genereer_motivatie():
         "Economische rechtvaardigheid"
 ]
 
-    willekeurig_onderwerp = random.choice(onderwerpen)
+    random_subject = random.choice(subjects)
 
 
 
-    #RAG
-    #Data
-    
-  
+    #Retrieval-Augmentad Generation
     #Embeddings
     embeddings_model = OpenAIEmbeddings(model = "text-embedding-3-small")
-    # Vectorstores
+
+    # Vectorstore
     pdfs = load_pdf()
     vectorstore_motivatie = LanceDB.from_documents(pdfs, embeddings_model)
 
-
-
+    #MultiQueryRetriever
     llm = ChatOpenAI(openai_api_key= openai.api_key, temperature=0)
-    retriever_motivatie = vectorstore_motivatie.as_retriever(search_type="similarity", search_kwargs={"k": 4})
-    retriever_motivatie= MultiQueryRetriever.from_llm(
-    retriever=retriever_motivatie, llm=llm
+    retriever_motivation = vectorstore_motivatie.as_retriever(search_type="similarity", search_kwargs={"k": 4})
+    retriever_motivation= MultiQueryRetriever.from_llm(
+    retriever=retriever_motivation, llm=llm
 )
 
 
@@ -75,8 +72,8 @@ def genereer_motivatie():
     )
 
     rag_chain_with_source = RunnableParallel(
-        {"context": retriever_motivatie, "question": RunnablePassthrough()}
+        {"context": retriever_motivation, "question": RunnablePassthrough()}
     ).assign(answer=rag_chain_from_pages)
-    antwoord = rag_chain_with_source.invoke(f"Schrijf een hippe, inspirerende en creatieve aanmoediging of tip op basis van één concreet voordeel, ondersteund door middel van concrete statistieken en cijfers uit de gegeven bronnen, van een plantaardig dieet op vlak van {willekeurig_onderwerp} in maximum een of twee zinnen")
+    output = rag_chain_with_source.invoke(f"Schrijf een hippe, inspirerende en creatieve aanmoediging of tip op basis van één concreet voordeel, ondersteund door middel van concrete statistieken en cijfers uit de gegeven bronnen, van een plantaardig dieet op vlak van {random_subject} in maximum een of twee zinnen")
 
-    return antwoord['answer']
+    return output['answer']

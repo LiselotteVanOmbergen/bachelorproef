@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import openai
 
-from rag import genereer_motivatie
+from rag_motivation import genereer_motivatie
 from loader import load_pdf
 
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
@@ -54,4 +54,4 @@ if st.button('Genereer Maaltijdplan'):
    
 
 
-st.write(genereer_motivatie())
+st.sidebar.write(genereer_motivatie())
