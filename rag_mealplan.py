@@ -215,7 +215,7 @@ def generate_mealplan():
     template = """Je bent een plantaardige voedingscoach die plantaardige maaltijdplannen opstelt in het Nederlands op basis van de gegeven context. Stel een dagelijks plantaardig maaltijdplan op in json met dezelfde structuur als in het gegeven voorbeeld. De totale voedingswaarden van de gerechten moeten exact overeenkomen met de gegeven voedingsbehoeften.
     Voorbeeld: {voorbeeld_maaltijdplan}
     Context: {context}
-    Voedingsbehoeften: {voedingswaarden}             
+    Voedingsbehoeften: {voorbeeld_voedingswaarden}             
     Question: {question}
     """
     prompt = ChatPromptTemplate.from_template(template)
