@@ -8,10 +8,15 @@ from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain.retrievers.multi_query import MultiQueryRetriever
+import streamlit as st
+import os
 
 from loader import load_pdf
 
-def genereer_motivatie(key):
+openai.api_key = os.getenv(st.secrets["OPENAI_API_KEY"])
+
+
+def genereer_motivatie():
 
     onderwerpen = [
         "Gezondheid",
@@ -34,9 +39,10 @@ def genereer_motivatie(key):
     
   
     #Embeddings
-    embeddings_model = OpenAIEmbeddings(api_key= key)
+    embeddings_model = OpenAIEmbeddings(openai.api_key)
     # Vectorstores
-    vectorstore_motivatie = LanceDB.from_documents(load_pdf(), embeddings_model)
+    pdfs = load_pdf()
+    vectorstore_motivatie = LanceDB.from_documents(pdfs, embeddings_model)
 
 
 
