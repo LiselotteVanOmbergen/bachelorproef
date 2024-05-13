@@ -12,13 +12,13 @@ st.set_page_config(layout="wide")
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 
-st.title("Vegan maaltijdplangenerator")
+st.title("Vegan maaltijdplangenerator :seedling:")
 
 col1, col2 = st.columns(2)
 
     # Maaltijdplan genereren en weergeven in de eerste kolom
 with col2:
-        st.subheader('')
+        st.subheader(':earth:')
         st.write(generate_motivation())
 with col1:
         
