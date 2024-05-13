@@ -12,7 +12,13 @@ def dict_to_text(dictionary, indent=0):
                 else:
                     text += "  " * (indent + 1) + f"- {item}\n"
         else:
-            text += "  " * indent + f"{key.capitalize()}: {value}\n"
+            # Check if the value is a string and contains newline characters
+            if isinstance(value, str) and "\n" in value:
+                # If yes, split the value by newline and add each part separately
+                parts = value.split("\n")
+                for part in parts:
+                    text += "  " * indent + f"{key.capitalize()}: {part}\n"
+            else:
+                # If no newline characters or if the value is not a string, add the value normally
+                text += "  " * indent + f"{key.capitalize()}: {value}\n"
     return text
-
-
