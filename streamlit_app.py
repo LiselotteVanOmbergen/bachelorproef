@@ -37,6 +37,7 @@ with col1:
         if st.button('Genereer Maaltijdplan'):
             st.header('Jouw Maaltijdplan')
             mealplan =(generate_mealplan(gender, age, height , weight, activity_level, goal))
+            st.json(mealplan)
             st.write(dict_to_text(json.loads(mealplan)))
             # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Boodschappenlijst')
