@@ -51,8 +51,7 @@ with col1:
                     '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
         st.subheader('Jouw Maaltijdplan')
-        st.write(generate_mealplan())
-       
+        st.json(generate_mealplan())
 """      # Knop om maaltijdplan te genereren
         if st.button('Genereer Maaltijdplan'):
             # Genereer maaltijdplan op basis van gebruikersinvoer
