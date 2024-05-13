@@ -234,8 +234,7 @@ def generate_mealplan():
     rag_chain_with_source = RunnableParallel(
     {"context": retriever_maaltijdplan, "question": RunnablePassthrough(), "voorbeeld_voedingswaarden" :RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
     ).assign(answer=rag_chain_from_docs)
-    answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
+   # answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
     answer = rag_chain_with_source.invoke(f"(Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {voorbeeld_voedingswaarden}")
     return answer["answer"]
 
-generate_mealplan()
