@@ -112,7 +112,7 @@ voorbeeld_maaltijdplan = {
     }
 }
 
-print("test")
+print("test2")
 print(dict_to_text(voorbeeld_maaltijdplan))
 print(print_shopping_list(generate_shopping_list_dict(voorbeeld_maaltijdplan)))
 

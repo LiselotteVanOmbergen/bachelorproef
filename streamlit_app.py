@@ -40,7 +40,7 @@ with col1:
             st.write(dict_to_text(json.loads(mealplan)))
             # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Boodschappenlijst')
-            st.write(print_shopping_list(generate_shopping_list_dict(mealplan)))
+            st.write((generate_shopping_list_dict(mealplan)))
     # Motivatie genereren en weergeven in de tweede kolom
 
         
