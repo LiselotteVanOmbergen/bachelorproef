@@ -18,9 +18,7 @@ st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 col1, col2 = st.columns(2)
     # Maaltijdplan genereren en weergeven in de eerste kolom
-with col2:
-    #st.subheader(':earth_africa:')
-    st.write(generate_motivation())
+
 
 with col1:
          # Motivatie genereren en weergeven in de tweede kolom
@@ -41,7 +39,7 @@ with col1:
     # Knop om maaltijdplan te genereren
             if st.button('Genereer maaltijdplan'):
                 st.header('Jouw maaltijdplan')
-                mealplan =(generate_mealplan(gender, age, height , weight, activity_level, goal))
+                mealplan = (generate_mealplan(gender, age, height , weight, activity_level, goal))
                 st.text(dict_to_text(json.loads(mealplan)))
                 st.download_button("Download maaltijdplan", mealplan)
             # Genereer maaltijdplan op basis van gebruikersinvoer
