@@ -1,44 +1,8 @@
-from langchain_community.document_loaders import DataFrameLoader
-import pandas as pd
-import openai
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai.embeddings import OpenAIEmbeddings
-from langchain_openai import ChatOpenAI
-from langchain_core.runnables import RunnablePassthrough
-from langchain_core.output_parsers import StrOutputParser
-from langchain.chains.query_constructor.base import AttributeInfo
-from langchain.retrievers.self_query.base import SelfQueryRetriever
-import streamlit as st
-import os
-from langchain_community.vectorstores import FAISS
-from langchain_community.vectorstores import LanceDB
-from langchain_community.vectorstores import Qdrant
-from langchain_core.runnables import RunnableParallel
-from pathlib import Path
 
 
-# voorbeelden
-voorbeeld_voedingswaarden2 = {
-  "energiebehoefte": 1947,
-  "koolhydraten": "219-274 gram",
-  "eiwitten": "94-119 gram",
-  "vetten": "63-78 gram",
-  "vezels": "minimaal 25 gram",
-  "ijzer": "18 mg",
-  "calcium": "1000 mg",
-  "zink": "8 mg"
-}
-
-voorbeeld_voedingswaarden = {
-  "energiebehoefte": "",
-  "koolhydraten": "",
-  "eiwitten": "",
-  "vetten": "",
-  "vezels": "",
-  "ijzer": "",
-  "calcium": "",
-  "zink": ""
-}
+from shopping_list import generate_shopping_list_dict
+from shopping_list import print_shopping_list
+from dict_to_text import dict_to_text
 
 voorbeeld_maaltijdplan = {
     "maaltijdplan": {
@@ -148,98 +112,9 @@ voorbeeld_maaltijdplan = {
     }
 }
 
-openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
-
-def generate_mealplan(gender= 'vrouw', age = 34, height = 163, weight = 75, activity_level = 'gemiddeld', goal = '0.5 kilo per week afvallen'):
-    gender = gender
-    age = age
-    height = height
-    weight = weight
-    activity_level = activity_level
-    goal = goal
-    df = pd.DataFrame()
-    paths = Path("./data/recipes").glob('**/*.csv')
-    for path in paths:
-        temp_df = pd.read_csv(filepath_or_buffer=str(path))
-        temp_df = temp_df.rename(columns={'Unnamed: 0': 'id'})
-    df = pd.concat([df, temp_df], ignore_index=True)
-        
-    
-    #Document loader
-    loader = DataFrameLoader(df, page_content_column="ingredients")
-    recipes = loader.load()
-
-    #Embeddings
-    embeddings_model = OpenAIEmbeddings(model = "text-embedding-3-small")
-
-    # Vectorstores
-    vectorstore_mealplan = Qdrant.from_documents(
-    recipes,
-    embeddings_model,
-    location=":memory:",  # Local mode with in-memory storage only
-    collection_name="my_documents",
-)
-    #vectorstore_mealplan = Qdrant.from_documents(recipes, embeddings_model)
-    import random
-    def random_num():
-        id_list = []
-        for i in range(8):
-            id_list.append(random.randint(0, 1389))
-        return str(id_list)
-
-    metadata_field_info = [
-        AttributeInfo(
-            name="id",
-            description="nummer",
-            type="integer",
-        ),
+print("test")
+print(dict_to_text(voorbeeld_maaltijdplan))
+print(print_shopping_list(generate_shopping_list_dict(voorbeeld_maaltijdplan)))
 
 
-        AttributeInfo(
-            name="title",
-            description="Title of recepy",
-            type="string",
-        ),
-
-
-        ]
-    document_content_description = "Vegan recepies"
-    llm = ChatOpenAI(openai_api_key= openai.api_key, model="gpt-3.5-turbo", response_format = {"type": "json_object" })
-    retriever_maaltijdplan = SelfQueryRetriever.from_llm(
-        llm,
-        vectorstore_mealplan,
-        document_content_description,
-        metadata_field_info,
-        verbose = True,
-        search_type='similarity',
-        search_kwargs={'k': 10}
-    )
-
-
-
-    template = """Je bent een Nederlandstalige plantaardige voedingscoach die plantaardige maaltijdplannen opstelt in uitsluitend Nederlands op basis van de gegeven context. Stel een dagelijks plantaardig maaltijdplan op in json met dezelfde structuur als in het gegeven voorbeeld. De totale voedingswaarden van de gerechten moeten exact overeenkomen met de gegeven voedingsbehoeften.
-    Voorbeeld: {voorbeeld_maaltijdplan}
-    Context: {context}
-    Voedingsbehoeften: {voorbeeld_voedingswaarden}             
-    Question: {question}
-    """
-    prompt = ChatPromptTemplate.from_template(template)
-
-
-
-    def format_docs(documents):
-        return "\n\n".join([d.page_content for d in documents])
-    rag_chain_from_docs = (
-        RunnablePassthrough.assign(context=(lambda x: format_docs(x["context"])))
-        | prompt
-        | llm
-        | StrOutputParser()
-    )
-
-    rag_chain_with_source = RunnableParallel(
-    {"context": retriever_maaltijdplan, "question": RunnablePassthrough(), "voorbeeld_voedingswaarden" :RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
-    ).assign(answer=rag_chain_from_docs)
-   # answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
-    answer = rag_chain_with_source.invoke(f"(Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {voorbeeld_voedingswaarden}")
-    return answer["answer"]
-
+# JSON data

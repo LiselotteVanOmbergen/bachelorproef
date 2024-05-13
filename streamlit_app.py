@@ -4,35 +4,15 @@ import openai
 
 from rag_motivation import generate_motivation
 from rag_mealplan import generate_mealplan
+from dict_to_text import dict_to_text
+from shopping_list import generate_shopping_list_dict
+from shopping_list import print_shopping_list
+
 st.set_page_config(layout="wide")
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 
 st.title("Vegan maaltijdplangenerator")
-
-
-def generate_meal_plan(gender= 'vrouw', age = 34, height = 163, weight = 75, activity_level = 'gemiddeld', goal = '0.5 kilo per week afvallen'):
-    try:
-        user_template = f"Stel een plantaardig dagelijks maaltijdplan op dat voldoet aan de voedingsbehoeften van een {gender} van {age} jaar, {weight} kilo, {height} cm, met een {activity_level} activiteitsniveau en als doel {goal}. De totale voedingswaarden stemmen overeen met de voedingsbehoeften. Het plan is gedetailleerd en bevat minstens ontbijt, lunch, snacks en diner en eventueel dessert."
-
-        completion = openai.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-        {"role": "system", "content": "Je bent een voedingscoach die plantaardige maaltijdplannen opstelt."},
-        {"role": "user", "content": user_template}
-    ]
-)
-        
-
-        
-
-   
-
-        return completion.choices[0].message.content.replace('\\n', '\n')
-
-    except Exception as e:
-        return f"Een fout is opgetreden: {str(e)}"
-
 
 col1, col2 = st.columns(2)
 
@@ -51,16 +31,18 @@ with col1:
                     '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
         st.subheader('Jouw Maaltijdplan')
-        st.json(generate_mealplan())
-"""      # Knop om maaltijdplan te genereren
+        
+    # Knop om maaltijdplan te genereren
         if st.button('Genereer Maaltijdplan'):
-            # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Jouw Maaltijdplan')
-            # st.write(generate_meal_plan(gender, age, height, weight, activity_level, goal))
- """
+            mealplan =(generate_mealplan(gender= 'vrouw', age = 34, height = 163, weight = 75, activity_level = 'gemiddeld', goal = '0.5 kilo per week afvallen'))
+            st.write(dict_to_text(mealplan))
+            # Genereer maaltijdplan op basis van gebruikersinvoer
+            st.header('Boodschappenlijst')
+            st.write(print_shopping_list(generate_shopping_list_dict(mealplan)))
     # Motivatie genereren en weergeven in de tweede kolom
 with col2:
         st.subheader('')
         st.write(generate_motivation())
-
+        
    
