@@ -2,8 +2,8 @@ import streamlit as st
 import os
 import openai
 
-from rag_motivation import genereer_motivatie
-from loader import load_pdf
+from rag_motivation import genereer_motivation
+
 
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
