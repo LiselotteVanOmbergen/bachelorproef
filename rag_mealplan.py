@@ -168,7 +168,13 @@ def generate_mealplan():
     embeddings_model = OpenAIEmbeddings(model = "text-embedding-3-small")
 
     # Vectorstores
-    vectorstore_mealplan = Qdrant.from_documents(recipes, embeddings_model)
+    vectorstore_mealplan = Qdrant.from_documents(
+    recipes,
+    embeddings_model,
+    location=":memory:",  # Local mode with in-memory storage only
+    collection_name="my_documents",
+)
+    #vectorstore_mealplan = Qdrant.from_documents(recipes, embeddings_model)
     import random
     def random_num():
         id_list = []
