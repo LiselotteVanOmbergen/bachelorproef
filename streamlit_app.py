@@ -54,4 +54,4 @@ if st.button('Genereer Maaltijdplan'):
    
 
 
-st.sidebar.write(genereer_motivatie())
+st.sidebar.write(genereer_motivation())
