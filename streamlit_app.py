@@ -18,7 +18,9 @@ st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 col1, col2 = st.columns(2)
     # Maaltijdplan genereren en weergeven in de eerste kolom
-
+with col2:
+    #st.subheader(':earth_africa:')
+    st.write(generate_motivation())
 
 with col1:
         st.subheader(':earth_africa:')
