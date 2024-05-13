@@ -74,6 +74,6 @@ def generate_motivation():
     rag_chain_with_source = RunnableParallel(
         {"context": retriever_motivation, "question": RunnablePassthrough()}
     ).assign(answer=rag_chain_from_pages)
-    output = rag_chain_with_source.invoke(f"Schrijf een hippe, inspirerende en creatieve aanmoediging of tip op basis van één concreet voordeel, ondersteund door middel van concrete statistieken en cijfers uit de gegeven bronnen, van een plantaardig dieet op vlak van {random_subject} in maximum een of twee zinnen")
+    output = rag_chain_with_source.invoke(f"Schrijf een hippe, inspirerende en creatieve aanmoediging of tip in het Nederlands op basis van één concreet voordeel, ondersteund door middel van concrete statistieken en cijfers uit de gegeven bronnen, van een plantaardig dieet op vlak van {random_subject} in maximum één of twee zinnen")
 
     return output['answer']
