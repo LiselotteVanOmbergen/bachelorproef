@@ -18,7 +18,7 @@ col1, col2 = st.columns(2)
 
     # Maaltijdplan genereren en weergeven in de eerste kolom
 with col2:
-        st.subheader(':earth:')
+        st.subheader(':earth_africa:')
         st.write(generate_motivation())
 with col1:
         
@@ -41,7 +41,7 @@ with col1:
             st.write(dict_to_text(json.loads(mealplan)))
             # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Boodschappenlijst')
-            st.write((generate_shopping_list_dict(mealplan)))
+            st.json((generate_shopping_list_dict(mealplan)))
     # Motivatie genereren en weergeven in de tweede kolom
 
         
