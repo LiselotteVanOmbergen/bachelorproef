@@ -56,7 +56,7 @@ with col1:
     # Genereer maaltijdplan op basis van gebruikersinvoer
             st.header('Jouw Maaltijdplan')
             #st.write(generate_meal_plan(gender, age, height, weight, activity_level, goal))
-            st.wrirte(generate_mealplan)
+            st.wrirte(generate_mealplan())
     # Motivatie genereren en weergeven in de tweede kolom
 with col2:
         st.subheader('')
