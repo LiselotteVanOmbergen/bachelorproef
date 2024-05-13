@@ -13,8 +13,7 @@ import os
 
 from loader import load_pdf
 
-openai.api_key = os.getenv(st.secrets["OPENAI_API_KEY"])
-
+openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 def genereer_motivatie():
 
@@ -39,7 +38,7 @@ def genereer_motivatie():
     
   
     #Embeddings
-    embeddings_model = OpenAIEmbeddings()
+    embeddings_model = OpenAIEmbeddings(model = "text-embedding-3-small")
     # Vectorstores
     pdfs = load_pdf()
     vectorstore_motivatie = LanceDB.from_documents(pdfs, embeddings_model)

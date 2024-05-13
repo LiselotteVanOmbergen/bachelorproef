@@ -5,7 +5,7 @@ import openai
 from rag import genereer_motivatie
 from loader import load_pdf
 
-openai.api_key = os.getenv(st.secrets["OPENAI_API_KEY"])
+openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 
 st.title("Vegan maaltijdplangenerator")
