@@ -14,12 +14,13 @@ openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
-col1, col2 = st.columns(2)
-
-    # Maaltijdplan genereren en weergeven in de eerste kolom
 
 st.subheader(':earth_africa:')
 st.write(generate_motivation())
+col1, col2 = st.columns(2)
+    # Maaltijdplan genereren en weergeven in de eerste kolom
+
+
 with col1:
         
         gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
@@ -40,7 +41,7 @@ if st.button('Genereer maaltijdplan'):
     st.text(dict_to_text(json.loads(mealplan)))
     st.download_button("Download maaltijdplan", mealplan)
             # Genereer maaltijdplan op basis van gebruikersinvoer
-with col2:
+    with col2:
             st.header('Boodschappenlijst')
             boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
             st.text(boodschappenlijst)
