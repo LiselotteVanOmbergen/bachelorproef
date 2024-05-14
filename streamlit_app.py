@@ -14,9 +14,6 @@ st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 col1, col2 = st.columns(2)
 
-if 'clicked_generate' not in st.session_state:
-    st.session_state.clicked_generate = False
-
 
 with col1:
         st.write(generate_motivation())
