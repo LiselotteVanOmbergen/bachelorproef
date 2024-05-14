@@ -195,7 +195,7 @@ def generate_mealplan(dietary_requirements, user_requirements):
 
 
 
-    template = """Je bent een Nederlandstalige plantaardige voedingscoach die plantaardige maaltijdplannen opstelt in uitsluitend Nederlands op basis van de gegeven context. Stel een dagelijks plantaardig maaltijdplan op in json met dezelfde structuur als maar andere gerechten dan in het gegeven voorbeeld. De totale voedingswaarden van de gerechten moeten exact overeenkomen met de gegeven voedingsbehoeften.
+    template = """Je bent een Nederlandstalige plantaardige voedingscoach die uitsluitend Nederlandstalige plantaardige maaltijdplannen opstelt op basis van de gegeven context. Stel een dagelijks plantaardig maaltijdplan op in json met dezelfde structuur als maar andere gerechten dan in het gegeven voorbeeld. De totale voedingswaarden van de gerechten moeten exact overeenkomen met de gegeven voedingsbehoeften.
     Voorbeeld: {voorbeeld_maaltijdplan}
     Context: {context}
     Voedingsbehoeften: {dietary_requirements}             
