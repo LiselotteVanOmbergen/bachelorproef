@@ -13,14 +13,16 @@ openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 col1, col2 = st.columns(2)
+with col1:
+        
+        st.write(generate_motivation())
 
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
 
 if not st.session_state.clicked:
     with col1:
-        st.subheader(':earth_africa:')
-        st.write(generate_motivation())
+       
 
         if st.button('Genereer maaltijdplan'):
             st.session_state.clicked = True
