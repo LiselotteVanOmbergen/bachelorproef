@@ -133,12 +133,6 @@ def random_num():
 
 
 def generate_mealplan(dietary_requirements, user_requirements):
-    gender = gender
-    age = age
-    height = height
-    weight = weight
-    activity_level = activity_level
-    goal = goal
     df = pd.DataFrame()
     paths = Path("./data/recipes").glob('**/*.csv')
     for path in paths:
