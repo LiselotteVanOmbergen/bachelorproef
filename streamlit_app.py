@@ -12,17 +12,21 @@ openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
-col1, col2 = st.columns(2)
+#col1, col2 = st.columns(2)
 
+if 'mealplan_generated' not in st.session_state:
+    st.session_state.mealplan_generated = False
 
-with col1:
+if not st.session_state.mealplan_generated:
+  
+        st.subheader(':earth_africa:')
         st.write(generate_motivation())
 
-if st.button('Genereer maaltijdplan'):
-      
+    if st.button('Genereer maaltijdplan'):
+        st.session_state.mealplan_generated = True
 
-
-    with col1:
+if st.session_state.mealplan_generated:
+  
         gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
         age = st.number_input('Leeftijd', min_value=1, max_value=100, value=30, step=1)
         height = st.number_input('Lengte (cm)', min_value=1, max_value=220, value=170, step=1)
@@ -31,14 +35,15 @@ if st.button('Genereer maaltijdplan'):
         goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                                      '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
-    if st.button('Indienen'):
+        if st.button('Indienen'):
             st.header('Jouw maaltijdplan')
             mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
             st.text(dict_to_text(json.loads(mealplan)))
             st.download_button("Download maaltijdplan", mealplan)
 
-with col2:
+
         st.header('Boodschappenlijst')
-        boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
-        st.text(boodschappenlijst)
-        st.download_button("Download boodschappenlijst", boodschappenlijst)
+        if st.session_state.mealplan_generated:
+            boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
+            st.text(boodschappenlijst)
+            st.download_button("Download boodschappenlijst", boodschappenlijst)
