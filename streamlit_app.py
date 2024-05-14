@@ -17,8 +17,10 @@ col1, col2 = st.columns(2)
 
 
   
-st.write(generate_motivation())
+
 with col1:
+    st.write(generate_motivation())
+
     gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
     age = st.number_input('Leeftijd', min_value=1,
                         max_value=100, value=30, step=1)
@@ -51,13 +53,14 @@ with col2:
 if st.button('Genereer maaltijdplan'):
             dietary_requirements = generate_dietary_requirements(gender = gender, age = age, height = height, weight = weight, activity_level = activity_level, goal = goal)
             st.header('Jouw maaltijdplan')
-            mealplan = generate_mealplan(dietary_requirements, user_requirements = user_requirements)
-            st.text(dict_to_text(json.loads(mealplan)))
-            st.download_button("Download maaltijdplan", mealplan)
-
+            mealplan = generate_mealplan(generate_dietary_requirements(gender, age, height, weight,  activity_level, goal, user_requirements)
+            #st.text(dict_to_text(json.loads(mealplan)))
+            #st.download_button("Download maaltijdplan", mealplan)
+            st.write(mealplan)
 
             st.header('Boodschappenlijst')
        
             boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
             st.text(boodschappenlijst)
-            st.download_button("Download boodschappenlijst", boodschappenlijst)
+            #st.download_button("Download boodschappenlijst", boodschappenlijst)
+            st.write(boodschappenlijst)
