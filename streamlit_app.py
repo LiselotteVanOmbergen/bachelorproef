@@ -22,8 +22,8 @@ if not st.session_state.mealplan_generated:
         st.subheader(':earth_africa:')
         st.write(generate_motivation())
 
-    if st.button('Genereer maaltijdplan'):
-        st.session_state.mealplan_generated = True
+        if st.button('Genereer maaltijdplan'):
+            st.session_state.mealplan_generated = True
 
 if st.session_state.mealplan_generated:
   
