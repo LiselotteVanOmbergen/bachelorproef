@@ -34,13 +34,13 @@ if st.session_state.clicked_generate:
         goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                                      '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
-        if st.button('Indienen'):
+if st.button('Indienen'):
             st.header('Jouw maaltijdplan')
             mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
             st.text(dict_to_text(json.loads(mealplan)))
             st.download_button("Download maaltijdplan", mealplan)
 
-    with col2:
+with col2:
         st.header('Boodschappenlijst')
         boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
         st.text(boodschappenlijst)
