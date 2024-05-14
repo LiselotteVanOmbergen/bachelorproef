@@ -195,7 +195,7 @@ def generate_mealplan(dietary_requirements, user_requirements):
 
 
 
-    template = """Je bent een Nederlandstalige plantaardige voedingscoach die plantaardige maaltijdplannen opstelt in uitsluitend Nederlands op basis van de gegeven context. Stel een dagelijks plantaardig maaltijdplan op in json met dezelfde structuur als in het gegeven voorbeeld. De totale voedingswaarden van de gerechten moeten exact overeenkomen met de gegeven voedingsbehoeften.
+    template = """Je bent een Nederlandstalige plantaardige voedingscoach die plantaardige maaltijdplannen opstelt in uitsluitend Nederlands op basis van de gegeven context. Stel een dagelijks plantaardig maaltijdplan op in json met dezelfde structuur als maar andere gerechten dan in het gegeven voorbeeld. De totale voedingswaarden van de gerechten moeten exact overeenkomen met de gegeven voedingsbehoeften.
     Voorbeeld: {voorbeeld_maaltijdplan}
     Context: {context}
     Voedingsbehoeften: {dietary_requirements}             
@@ -207,7 +207,7 @@ def generate_mealplan(dietary_requirements, user_requirements):
     if user_requirements:
         question += f"Gebruik {user_requirements}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
     else: 
-        question += f"Gebruik recepten met id kleiner dan {random_num()} en groter dan {int({random_num()} - 10)}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
+        question += f"Gebruik recepten met id kleiner dan {random_num()} en groter dan {int({random_num()} - 10)}. {voorbeeld_maaltijdplan}, {dietary_requirements}"
 
 
     def format_docs(documents):
