@@ -52,8 +52,8 @@ if st.session_state.data_sent:
             st.download_button("Download maaltijdplan", mealplan)
 
 
-        st.header('Boodschappenlijst')
-        if st.session_state.mealplan_generated:
+            st.header('Boodschappenlijst')
+       
             boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
             st.text(boodschappenlijst)
             st.download_button("Download boodschappenlijst", boodschappenlijst)
