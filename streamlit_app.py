@@ -35,7 +35,7 @@ if not st.session_state.clicked:
                                          '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
             if st.button('Indienen'):
-                st.session_state.clicked = False
+                st.session_state.clicked = True
 
                 st.header('Jouw maaltijdplan')
                 mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
@@ -47,3 +47,10 @@ if not st.session_state.clicked:
                     boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
                     st.text(boodschappenlijst)
                     st.download_button("Download boodschappenlijst", boodschappenlijst)
+else:
+    with col1:
+        st.header('Jouw maaltijdplan')
+        st.text("Hier komt het maaltijdplan")
+    with col2:
+        st.header('Boodschappenlijst')
+        st.text("Hier komt de boodschappenlijst")
