@@ -9,7 +9,7 @@ from dict_to_text import dict_to_text
 from shopping_list import generate_shopping_list_dict
 from shopping_list import print_shopping_list
 
-
+st.set_page_config(layout="wide")
 
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
@@ -35,7 +35,7 @@ if st.session_state.clicked:
         
 
 
-st.set_page_config(layout="wide")
+
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 
