@@ -15,7 +15,7 @@ from langchain_community.vectorstores import LanceDB
 from langchain_community.vectorstores import Qdrant
 from langchain_core.runnables import RunnableParallel
 from pathlib import Path
-
+import random
 
 # voorbeeld
 voorbeeld_maaltijdplan = {
@@ -126,9 +126,13 @@ voorbeeld_maaltijdplan = {
     }
 }
 
+
+def random_num():
+  return random.randint(0, 1389)
+
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
-def generate_mealplan(dietary_requirements):
+def generate_mealplan(dietary_requirements, user_requirements):
     gender = gender
     age = age
     height = height
@@ -175,13 +179,19 @@ def generate_mealplan(dietary_requirements):
 
         AttributeInfo(
             name="title",
-            description="Title of recepy",
+            description="Titel van recept",
+            type="string",
+        ),
+
+           AttributeInfo(
+            name="preparation",
+            description="Bereidingswijze",
             type="string",
         ),
 
 
         ]
-    document_content_description = "Vegan recepies"
+    document_content_description = "Vegan recepten"
     llm = ChatOpenAI(openai_api_key= openai.api_key, model="gpt-3.5-turbo", response_format = {"type": "json_object" })
     retriever_maaltijdplan = SelfQueryRetriever.from_llm(
         llm,
@@ -203,6 +213,11 @@ def generate_mealplan(dietary_requirements):
     """
     prompt = ChatPromptTemplate.from_template(template)
 
+    question = ""
+    if user_requirements:
+        question += f"Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
+    else: 
+        question += f"Gebruik recepten met id lager dan {random_num()} en hoger dan {int({random_num()} + 10)}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
 
 
     def format_docs(documents):
@@ -218,6 +233,6 @@ def generate_mealplan(dietary_requirements):
     {"context": retriever_maaltijdplan, "question": RunnablePassthrough(), "dietary_requirements" :RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
     ).assign(answer=rag_chain_from_docs)
    # answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
-    answer = rag_chain_with_source.invoke(f"(Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {dietary_requirements}")
+    answer = rag_chain_with_source.invoke(f"{question}")
     return answer["answer"]
 

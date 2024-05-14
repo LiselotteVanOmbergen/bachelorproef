@@ -31,10 +31,26 @@ activity_level = st.selectbox('Activiteitsniveau', [
 goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                              '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
+# Invoervelden voor ontbijt
+st.subheader("Ontbijt")
+ingredient_ontbijt = st.text_input("Ingrediënt of gerecht voor ontbijt")
+# Voeg meer ingrediëntenvelden toe zoals hierboven indien nodig voor ontbijt
+
+# Invoervelden voor lunch
+st.subheader("Lunch")
+ingredient_lunch = st.text_input("Ingrediënt of gerecht voor lunch")
+# Voeg meer ingrediëntenvelden toe zoals hierboven indien nodig voor lunch
+
+# Invoervelden voor diner
+st.subheader("Diner")
+ingredient_diner = st.text_input("Ingrediënt of gerecht voor diner")
+user_requirements = f"{ingredient_ontbijt} voor ontbijt, {ingredient_lunch} voor lunch en {ingredient_diner} voor diner"
+
+
 if st.button('Genereer maaltijdplan'):
-            dietary_requirements = generate_dietary_requirements(gender, age, height, weight, activity_level, goal)
+            dietary_requirements = generate_dietary_requirements(gender = gender, age = age, height = height, weight = weight, activity_level = activity_level, goal = goal)
             st.header('Jouw maaltijdplan')
-            mealplan = generate_mealplan(dietary_requirements)
+            mealplan = generate_mealplan(dietary_requirements, user_requirements = user_requirements)
             st.text(dict_to_text(json.loads(mealplan)))
             st.download_button("Download maaltijdplan", mealplan)
 
