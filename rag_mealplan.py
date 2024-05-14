@@ -215,7 +215,7 @@ def generate_mealplan(dietary_requirements, user_requirements):
 
     question = ""
     if user_requirements:
-        question += f"Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
+        question += f"Gebruik {user_requirements}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
     else: 
         question += f"Gebruik recepten met id lager dan {random_num()} en hoger dan {int({random_num()} + 10)}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
 
