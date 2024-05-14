@@ -19,7 +19,6 @@ if 'mealplan_generated' not in st.session_state:
 
 if not st.session_state.mealplan_generated:
   
-        st.subheader(':earth_africa:')
         st.write(generate_motivation())
 
         if st.button('Genereer maaltijdplan'):
@@ -34,7 +33,18 @@ if st.session_state.mealplan_generated:
         activity_level = st.selectbox('Activiteitsniveau', ['Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'])
         goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                                      '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
+if 'data_sent' not in st.session_state:
+    st.session_state.data_sent = False
 
+if not st.session_state.data_sent:
+  
+        st.subheader(':earth_africa:')
+       
+
+        if st.button('Genereer maaltijdplan'):
+            st.session_state.data_sent = True
+
+if st.session_state.data_sent:
         if st.button('Indienen'):
             st.header('Jouw maaltijdplan')
             mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
