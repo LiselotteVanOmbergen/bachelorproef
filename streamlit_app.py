@@ -19,7 +19,6 @@ if 'clicked_generate' not in st.session_state:
 
 if not st.session_state.clicked_generate:
     with col1:
-        st.subheader(':earth_africa:')
         st.write(generate_motivation())
 
     if st.button('Genereer maaltijdplan'):
