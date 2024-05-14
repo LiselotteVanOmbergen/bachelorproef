@@ -32,9 +32,9 @@ goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aank
                              '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
 if st.button('Genereer maaltijdplan'):
-    
+            dietary_requirements = generate_dietary_requirements(gender, age, height, weight, activity_level, goal)
             st.header('Jouw maaltijdplan')
-            mealplan = generate_mealplan(generate_dietary_requirements(gender, age, height, weight, activity_level, goal))
+            mealplan = generate_mealplan(dietary_requirements)
             st.text(dict_to_text(json.loads(mealplan)))
             st.download_button("Download maaltijdplan", mealplan)
 

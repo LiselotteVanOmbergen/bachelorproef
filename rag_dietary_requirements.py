@@ -77,7 +77,7 @@ def generate_dietary_requirements(gender= 'vrouw', age = 34, height = 163, weigh
     rag_chain_with_source = RunnableParallel(
     {"context": retriever_dietary_requirements, "question": RunnablePassthrough(), "voorbeeld_voedingswaarden" :RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
     ).assign(answer=rag_chain_from_docs)
-   # answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
+
     answer = rag_chain_with_source.invoke(f"(Bepaal de voedingsbehoeften per dag voor een {gender} van {age} jaar, {height} cm, {weight} kilo met een {activity_level}activiteitsniveau en met als doel {goal} in json volgens het gegeven voorbeeld: {voorbeeld_voedingswaarden}")
     return answer["answer"]
 
