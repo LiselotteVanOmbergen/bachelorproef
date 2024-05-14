@@ -3,6 +3,7 @@ import os
 import openai
 import json
 from rag_motivation import generate_motivation
+from rag_dietary_requirements import generate_dietary_requirements
 from rag_mealplan import generate_mealplan
 from dict_to_text import dict_to_text
 from shopping_list import generate_shopping_list_dict
@@ -33,7 +34,7 @@ goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aank
 if st.button('Genereer maaltijdplan'):
     
             st.header('Jouw maaltijdplan')
-            mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
+            mealplan = generate_mealplan(generate_dietary_requirements(gender, age, height, weight, activity_level, goal))
             st.text(dict_to_text(json.loads(mealplan)))
             st.download_button("Download maaltijdplan", mealplan)
 

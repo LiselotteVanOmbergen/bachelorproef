@@ -17,29 +17,7 @@ from langchain_core.runnables import RunnableParallel
 from pathlib import Path
 
 
-# voorbeelden
-voorbeeld_voedingswaarden2 = {
-  "energiebehoefte": 1947,
-  "koolhydraten": "219-274 gram",
-  "eiwitten": "94-119 gram",
-  "vetten": "63-78 gram",
-  "vezels": "minimaal 25 gram",
-  "ijzer": "18 mg",
-  "calcium": "1000 mg",
-  "zink": "8 mg"
-}
-
-voorbeeld_voedingswaarden = {
-  "energiebehoefte": "",
-  "koolhydraten": "",
-  "eiwitten": "",
-  "vetten": "",
-  "vezels": "",
-  "ijzer": "",
-  "calcium": "",
-  "zink": ""
-}
-
+# voorbeeld
 voorbeeld_maaltijdplan = {
     "maaltijdplan": {
         "ontbijt": {
@@ -150,7 +128,7 @@ voorbeeld_maaltijdplan = {
 
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
-def generate_mealplan(gender= 'vrouw', age = 34, height = 163, weight = 75, activity_level = 'gemiddeld', goal = '0.5 kilo per week afvallen'):
+def generate_mealplan(dietary_requirements):
     gender = gender
     age = age
     height = height
@@ -220,7 +198,7 @@ def generate_mealplan(gender= 'vrouw', age = 34, height = 163, weight = 75, acti
     template = """Je bent een Nederlandstalige plantaardige voedingscoach die plantaardige maaltijdplannen opstelt in uitsluitend Nederlands op basis van de gegeven context. Stel een dagelijks plantaardig maaltijdplan op in json met dezelfde structuur als in het gegeven voorbeeld. De totale voedingswaarden van de gerechten moeten exact overeenkomen met de gegeven voedingsbehoeften.
     Voorbeeld: {voorbeeld_maaltijdplan}
     Context: {context}
-    Voedingsbehoeften: {voorbeeld_voedingswaarden}             
+    Voedingsbehoeften: {dietary_requirements}             
     Question: {question}
     """
     prompt = ChatPromptTemplate.from_template(template)
@@ -237,9 +215,9 @@ def generate_mealplan(gender= 'vrouw', age = 34, height = 163, weight = 75, acti
     )
 
     rag_chain_with_source = RunnableParallel(
-    {"context": retriever_maaltijdplan, "question": RunnablePassthrough(), "voorbeeld_voedingswaarden" :RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
+    {"context": retriever_maaltijdplan, "question": RunnablePassthrough(), "dietary_requirements" :RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
     ).assign(answer=rag_chain_from_docs)
    # answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
-    answer = rag_chain_with_source.invoke(f"(Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {voorbeeld_voedingswaarden}")
+    answer = rag_chain_with_source.invoke(f"(Gebruik acai als ingrediënt voor het onbijt, hummus als snack, seitan voor de lunch en rijstpap als dessert en tomaat voor het diner.  {voorbeeld_maaltijdplan}, {dietary_requirements}")
     return answer["answer"]
 

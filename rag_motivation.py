@@ -38,7 +38,7 @@ def generate_motivation():
     embeddings_model = OpenAIEmbeddings(model = "text-embedding-3-small")
 
     # Vectorstore
-    pdfs = load_pdf()
+    pdfs = load_pdf("./data/motivation")
     vectorstore_motivatie = LanceDB.from_documents(pdfs, embeddings_model)
 
     #MultiQueryRetriever
