@@ -30,15 +30,10 @@ voorbeeld_voedingswaarden = {
 }
 
 
+
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
-def generate_dietary_requirements(gender= 'vrouw', age = 34, height = 163, weight = 75, activity_level = 'gemiddeld', goal = '0.5 kilo per week afvallen'):
-    gender = gender
-    age = age
-    height = height
-    weight = weight
-    activity_level = activity_level
-    goal = goal
+def generate_dietary_requirements(gender, age, height weight, activity_level, goal):
     
     #Document loader
     pdfs = load_pdf("./data/dietary_requirements")

@@ -126,11 +126,11 @@ voorbeeld_maaltijdplan = {
     }
 }
 
+openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 def random_num():
   return random.randint(0, 1389)
 
-openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 def generate_mealplan(dietary_requirements, user_requirements):
     gender = gender
@@ -162,12 +162,8 @@ def generate_mealplan(dietary_requirements, user_requirements):
     collection_name="my_documents",
 )
     #vectorstore_mealplan = Qdrant.from_documents(recipes, embeddings_model)
-    import random
-    def random_num():
-        id_list = []
-        for i in range(8):
-            id_list.append(random.randint(10, 1500))
-        return str(id_list)
+    
+
 
     metadata_field_info = [
         AttributeInfo(
