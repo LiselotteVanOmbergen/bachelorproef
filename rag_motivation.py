@@ -49,7 +49,7 @@ def generate_motivation():
 )
 
 
-    template = """Je bent een plantaardige voedingscoach. Beantwoord de vraag enkel op basis van de volgende context:
+    template = """Je bent een Nederlandstalige plantaardige voedingscoach. Beantwoord de vraag uitsluitend in het Nederlands enkel op basis van de volgende context:
 
     vraag: {question}
     context: {context}
