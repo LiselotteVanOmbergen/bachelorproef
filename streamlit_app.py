@@ -18,21 +18,20 @@ st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
   
 st.write(generate_motivation())
 
-if st.button('Genereer maaltijdplan'):
-    gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
-    age = st.number_input('Leeftijd', min_value=1, max_value=100, value=30, step=1)
-    height = st.number_input('Lengte (cm)', min_value=1,
+   gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
+   age = st.number_input('Leeftijd', min_value=1,
+                         max_value=100, value=30, step=1)
+   height = st.number_input('Lengte (cm)', min_value=1,
                             max_value=220, value=170, step=1)
-    weight = st.number_input('Gewicht (kg)', min_value=1,
+   weight = st.number_input('Gewicht (kg)', min_value=1,
                             max_value=500, value=70, step=1)
-    activity_level = st.selectbox('Activiteitsniveau', [
-        'Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'])
-    goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
+   activity_level = st.selectbox('Activiteitsniveau', [
+       'Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'])
+   goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                                 '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
-
+   if st.button('Genereer maaltijdplan'):
     
-    if st.button('Indienen'):
             st.header('Jouw maaltijdplan')
             mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
             st.text(dict_to_text(json.loads(mealplan)))
