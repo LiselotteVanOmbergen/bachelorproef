@@ -33,7 +33,7 @@ voorbeeld_voedingswaarden = {
 
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
-def generate_dietary_requirements(gender, age, height weight, activity_level, goal):
+def generate_dietary_requirements(gender, age, height, weight, activity_level, goal):
     
     #Document loader
     pdfs = load_pdf("./data/dietary_requirements")
@@ -57,7 +57,6 @@ def generate_dietary_requirements(gender, age, height weight, activity_level, go
 
     Question: {question}
     """
-
     prompt = ChatPromptTemplate.from_template(template)
 
     def format_docs(documents):
