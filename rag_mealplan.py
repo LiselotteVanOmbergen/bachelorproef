@@ -114,7 +114,7 @@ voorbeeld_maaltijdplan = {
             "bereidingswijze": "1. Verwarm de oven voor op 200°C.\n2. Dep de kikkererwten droog met keukenpapier en verwijder eventuele losse velletjes.\n3. Meng de kikkererwten met olijfolie, paprikapoeder, komijnpoeder, knoflookpoeder, zout en peper.\n4. Verdeel de gekruide kikkererwten over een met bakpapier beklede bakplaat.\n5. Rooster de kikkererwten in de voorverwarmde oven gedurende 30-35 minuten, schud ze halverwege de baktijd om, tot ze knapperig en goudbruin zijn.\n6. Laat de geroosterde kikkererwten afkoelen voordat je ze serveert."
         }
     },
-    "totaal_voedingswaarden": {
+    "totale voedingswaarden": {
         "calorieën": "1510 kcal",
         "koolhydraten": "125g",
         "vetten": "79g",
