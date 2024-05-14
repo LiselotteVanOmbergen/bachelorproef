@@ -13,16 +13,14 @@ openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 col1, col2 = st.columns(2)
-with col1:
-        
-        st.write(generate_motivation())
 
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
 
 if not st.session_state.clicked:
     with col1:
-       
+        st.subheader(':earth_africa:')
+        st.write(generate_motivation())
 
         if st.button('Genereer maaltijdplan'):
             st.session_state.clicked = True
@@ -37,6 +35,8 @@ if not st.session_state.clicked:
                                          '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
             if st.button('Indienen'):
+                st.session_state.clicked = False
+
                 st.header('Jouw maaltijdplan')
                 mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
                 st.text(dict_to_text(json.loads(mealplan)))
