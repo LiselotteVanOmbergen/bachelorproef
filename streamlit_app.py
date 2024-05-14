@@ -17,14 +17,14 @@ col1, col2 = st.columns(2)
 if 'clicked_generate' not in st.session_state:
     st.session_state.clicked_generate = False
 
-if not st.session_state.clicked_generate:
-    with col1:
+
+with col1:
         st.write(generate_motivation())
 
-    if st.button('Genereer maaltijdplan'):
-        st.session_state.clicked_generate = True
+if st.button('Genereer maaltijdplan'):
+      
 
-if st.session_state.clicked_generate:
+
     with col1:
         gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
         age = st.number_input('Leeftijd', min_value=1, max_value=100, value=30, step=1)
@@ -34,7 +34,7 @@ if st.session_state.clicked_generate:
         goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                                      '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
-if st.button('Indienen'):
+    if st.button('Indienen'):
             st.header('Jouw maaltijdplan')
             mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
             st.text(dict_to_text(json.loads(mealplan)))
