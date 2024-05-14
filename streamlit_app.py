@@ -32,7 +32,8 @@ if st.session_state.clicked:
     activity_level = st.selectbox('Activiteitsniveau', ['Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'])
     goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                                  '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
-
+    st.session_state.clicked = False
+    
     if st.button('Indienen'):
         st.header('Jouw maaltijdplan')
         mealplan = generate_mealplan(gender, age, height, weight, activity_level, goal)
