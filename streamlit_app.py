@@ -105,8 +105,8 @@ if st.session_state.form_submitted:
                                     'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
         st.session_state.gen_mealplan = dict_to_text(json.loads(mealplan))
         st.text(st.session_state.gen_mealplan)
-        if st.download_button("Download maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt"):
-            st.write(st.session_state.gen_mealplan)
+        st.download_button("Download maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt")
+        st.write(st.session_state.gen_mealplan)
        
 
     with col2:
@@ -114,7 +114,7 @@ if st.session_state.form_submitted:
             generate_shopping_list_dict(json.loads(mealplan)))
         st.session_state.gen_shopping_list = boodschappenlijst
         st.text(st.session_state.gen_shopping_list)
-        if st.download_button("Download boodschappenlijst", boodschappenlijst, file_name="boodschappenlijst.txt"):
-            st.write(st.session_state.gen_shopping_list)
+        st.download_button("Download boodschappenlijst", boodschappenlijst, file_name="boodschappenlijst.txt")
+        st.write(st.session_state.gen_shopping_list)
              
         st.session_state.form_submitted = False
