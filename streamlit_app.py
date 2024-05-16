@@ -124,6 +124,10 @@ if st.session_state.form_submitted:
     st.session_state.generated = True
 
 
+st.text(st.session_state.gen_meal)
+st.text(st.session_state.gen_shopping_list)
+
+
 def print_meal():
         st.text(st.session_state.gen_meal)
 
