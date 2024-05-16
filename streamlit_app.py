@@ -100,7 +100,6 @@ if st.session_state.form_submitted:
             pass  
 
     with col2:
-        st.header(' :shopping_trolley: Boodschappenlijst')
         boodschappenlijst = dict_to_text(
             generate_shopping_list_dict(json.loads(mealplan)))
         st.text(boodschappenlijst)
