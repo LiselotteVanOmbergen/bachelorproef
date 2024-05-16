@@ -118,6 +118,6 @@ if st.session_state.form_submitted:
 
 if st.session_state.generated:
     with col1:
-        st.download_button("Download Maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt")
+        st.download_button("Download Maaltijdplan", st.session_state.gen_meal, file_name="maaltijdplan.txt")
     with col2:
         st.download_button("Download Boodschappenlijst", st.session_state.gen_shopping, file_name="boodschappenlijst.txt")
