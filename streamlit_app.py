@@ -74,7 +74,7 @@ if not st.session_state.form_submitted:
             st.subheader("Dessert")
             st.session_state.user_inputs['ingredient_dessert'] = st.text_input("Ingrediënt of gerecht voor dessert", value=st.session_state.user_inputs['ingredient_dessert'])
         
-        submitted = st.form_submit_button('Genereer maaltijdplan')
+            submitted = st.form_submit_button('Genereer maaltijdplan')
 
     if submitted:
         st.session_state.form_submitted = True
