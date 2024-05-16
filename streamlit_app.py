@@ -124,9 +124,13 @@ if st.session_state.form_submitted:
     st.session_state.generated = True
 
 
-st.text(st.session_state.gen_meal)
-st.text(st.session_state.gen_shopping_list)
-
+col3, col4 = st.columns([0.7, 0.3])
+with col3:
+        st.header(' :carrot: Jouw maaltijdplan')
+        st.text(st.session_state.gen_meal)
+with col4:
+        st.header(' :shopping_trolley: Boodschappenlijst')
+        st.text(st.session_state.gen_shopping_list)
 
 if st.session_state.generated:
         st.download_button("Download maaltijdplan", st.session_state.gen_meal,
