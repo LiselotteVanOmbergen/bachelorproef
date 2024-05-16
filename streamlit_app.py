@@ -77,16 +77,20 @@ if not st.session_state.form_submitted:
 
 if st.session_state.form_submitted:
     user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch en {st.session_state.user_inputs['ingredient_diner']} voor diner"
-
-    st.header(' :carrot: Jouw maaltijdplan')
-    mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs['height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
-    st.text(dict_to_text(json.loads(mealplan)))
-    st.download_button("Download maaltijdplan", mealplan)
+    col1, col2 = st.columns([0.7, 0.3])
     
-    st.header(' :shopping_trolley: Boodschappenlijst')
-    boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
-    st.text(boodschappenlijst)
-    st.download_button("Download boodschappenlijst", boodschappenlijst)
+    with col1:
+        st.header(' :carrot: Jouw maaltijdplan')
+        mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
+                                    'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
+        st.text(dict_to_text(json.loads(mealplan)))
+        st.download_button("Download maaltijdplan", mealplan)
+    with col2:
+        st.header(' :shopping_trolley: Boodschappenlijst')
+        boodschappenlijst = dict_to_text(
+            generate_shopping_list_dict(json.loads(mealplan)))
+        st.text(boodschappenlijst)
+        st.download_button("Download boodschappenlijst", boodschappenlijst)
 
 
 
