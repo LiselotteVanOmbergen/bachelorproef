@@ -99,6 +99,8 @@ if not st.session_state.form_submitted:
 
             if st.form_submit_button('Genereer maaltijdplan'):
                 st.session_state.form_submitted = True
+                del st.session_state.gen_shopping_list
+                del st.session_state.gen_meal
                 # placeholder = st.empty()
 
 
@@ -137,6 +139,7 @@ if st.session_state.generated:
         with col5:
              st.download_button("Download maaltijdplan", st.session_state.gen_meal,
                            file_name="maaltijdplan.txt")
+                           
         with col6:    
             st.download_button("Download boodschappenlijst", st.session_state.gen_shopping_list,
                          file_name="boodschappenlijst.txt")
