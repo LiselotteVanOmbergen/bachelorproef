@@ -43,9 +43,10 @@ if 'user_inputs' not in st.session_state:
         'ingredient_dessert':''
     }
 
+placeholder = st.empty()
 
 if not st.session_state.form_submitted:
-    with st.form(key='user_input_form'):
+    with placeholder.form(key='user_input_form'):
         submitted = False
         col1, col2 = st.columns(2)
 
@@ -79,6 +80,7 @@ if not st.session_state.form_submitted:
 
             if st.form_submit_button('Genereer maaltijdplan'):
                 st.session_state.form_submitted = True
+                placeholder.empty()
        
 
 if st.session_state.form_submitted:
@@ -99,6 +101,4 @@ if st.session_state.form_submitted:
         st.download_button("Download boodschappenlijst", boodschappenlijst)
     
 
-    if st.button("Nieuw maaltijdplan"):
-            st.session_state.form_submitted = False
-           
+  
