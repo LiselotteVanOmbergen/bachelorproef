@@ -125,12 +125,10 @@ if st.session_state.form_submitted:
 
 
 def print_shopping_list():
-    with col2:
         st.text(st.session_state.gen_shopping_list)
 
 
 def print_meal():
-    with col1:
         st.text(st.session_state.gen_meal)
 
 
@@ -138,8 +136,9 @@ if st.session_state.generated:
     col3, col4 = st.columns([0.7, 0.3])
     with col3:
         if st.download_button("Download Maaltijdplan", st.session_state.gen_meal,
-                           file_name="maaltijdplan.txt",  on_click=print_meal()):
+                           file_name="maaltijdplan.txt":
             print_meal()
     with col4:
-        st.download_button("Download Boodschappenlijst", st.session_state.gen_shopping_list,
-                           file_name="boodschappenlijst.txt", on_click=print_shopping_list())
+        if st.download_button("Download Boodschappenlijst", st.session_state.gen_shopping_list,
+                         file_name="boodschappenlijst.txt"):
+            print_shopping_list()
