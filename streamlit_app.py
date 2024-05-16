@@ -23,7 +23,7 @@ import streamlit as st
 
 with cola.container(height=200):
     st.write(st.session_state.motivation_content)
-    st.markdown('<span style="color:green">f"{st.session_state.motivation_content})"</span>', unsafe_allow_html=True)
+    st.markdown('<span style="color:green">st.session_state.motivation_content</span>', unsafe_allow_html=True)
 
 with colb.container(height=200):
     st.write("Vergeet niet om dagelijks een vitamine B12-supplement in te nemen, aangezien deze vitamine van nature alleen voorkomt in dierlijke producten. Naast vitamine B12, kunnen ook andere supplementen worden overwogen om ervoor te zorgen dat je alle essentiële voedingsstoffen binnenkrijgt. Denk hierbij aan vitamine D, omega-3 vetzuren, calcium en ijzer.")
