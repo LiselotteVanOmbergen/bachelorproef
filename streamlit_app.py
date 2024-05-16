@@ -114,10 +114,20 @@ if st.session_state.form_submitted:
         st.session_state.gen_shopping_list = dict_to_text(
             generate_shopping_list_dict(json.loads(mealplan)))
         st.text(st.session_state.gen_shopping_list)
-    st.session_state.generated = True       
+    st.session_state.generated = True   
+
+def print_shopping_list():
+    with col2:
+        st.text(st.session_state.gen_shopping) 
+
+
+def print_meal():
+    with col1:
+        st.text(st.session_state.gen_meal)
 
 if st.session_state.generated:
     with col1:
-        st.download_button("Download Maaltijdplan", st.session_state.gen_meal, file_name="maaltijdplan.txt")
+        st.download_button("Download Maaltijdplan", st.session_state.gen_meal, file_name="maaltijdplan.txt",  on_click= print_shopping_list())
     with col2:
-        st.download_button("Download Boodschappenlijst", st.session_state.gen_shopping, file_name="boodschappenlijst.txt")
+        st.download_button("Download Boodschappenlijst", st.session_state.gen_shopping, file_name="boodschappenlijst.txt", on_click= print_shopping_list())
+
