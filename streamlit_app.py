@@ -21,8 +21,8 @@ if 'motivation_content' not in st.session_state:
 
 with col1.container(height=200):
     st.write(st.session_state.motivation_content)
-with col2.container(height=200):
-    st.empty()
+with col2.container(border=None):
+    st.write("")
         
 if 'form_submitted' not in st.session_state:
     st.session_state.form_submitted = False
