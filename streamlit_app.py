@@ -100,5 +100,5 @@ if st.session_state.form_submitted:
         st.text(boodschappenlijst)
         st.download_button("Download boodschappenlijst", boodschappenlijst)
 
-if st.button("Nieuw maaltijdplan"):
-    st.session_state.form_submitted = False
+    if st.button("Nieuw maaltijdplan"):
+        st.session_state.form_submitted = False
