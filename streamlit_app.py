@@ -46,6 +46,7 @@ if 'user_inputs' not in st.session_state:
 
 if not st.session_state.form_submitted:
     with st.form(key='user_input_form'):
+        submitted = False
         col1, col2 = st.columns(2)    
 
         with col1:
