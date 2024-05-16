@@ -99,6 +99,7 @@ if st.session_state.form_submitted:
             generate_shopping_list_dict(json.loads(mealplan)))
         st.text(boodschappenlijst)
         st.download_button("Download boodschappenlijst", boodschappenlijst)
-    
+        if st.button("Nieuw maaltijdplan genereren"):
+            st.rerun()
 
   
