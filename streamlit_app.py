@@ -81,6 +81,8 @@ if not st.session_state.form_submitted:
 
     if submitted:
         st.session_state.form_submitted = True
+        if st.button("Nieuw maaltijdplan"):
+            st.session_state.form_submitted = False
 
 if st.session_state.form_submitted:
     user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
@@ -99,5 +101,5 @@ if st.session_state.form_submitted:
         st.text(boodschappenlijst)
         st.download_button("Download boodschappenlijst", boodschappenlijst)
 
-    if st.button("Nieuw maaltijdplan"):
+if st.button("Nieuw maaltijdplan"):
         st.session_state.form_submitted = False
