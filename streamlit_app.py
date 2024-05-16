@@ -22,8 +22,8 @@ if 'motivation_content' not in st.session_state:
 with cola.container(height=200):
     st.write(st.session_state.motivation_content)
 with colb.container(border=None):
-    st.write("supplement B2 en omage 3- vetzuren")
-        
+    st.write("Vergeet niet om dagelijks een vitamine B12-supplement in te nemen, aangezien deze vitamine van nature alleen voorkomt in dierlijke producten. Naast vitamine B12, kunnen ook andere supplementen worden overwogen om ervoor te zorgen dat je alle essentiële voedingsstoffen binnenkrijgt. Denk hierbij aan vitamine D, omega-3 vetzuren, calcium en ijzer.")
+
 if 'form_submitted' not in st.session_state:
     st.session_state.form_submitted = False
 
@@ -45,7 +45,7 @@ if not st.session_state.form_submitted:
         col1, col2 = st.columns(2)    
 
         with col1:
-            
+            st.write("Vul hieronder je persoonlijke gegevens in.")
             st.session_state.user_inputs['gender'] = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'], index=['Vrouw', 'Man', 'Non-binair persoon'].index(st.session_state.user_inputs['gender']) if st.session_state.user_inputs['gender'] else None)
             st.session_state.user_inputs['age'] = st.number_input('Leeftijd', min_value=1, max_value=100, value=st.session_state.user_inputs['age'], step=1)
             st.session_state.user_inputs['height'] = st.number_input('Lengte (cm)', min_value=1, max_value=220, value=st.session_state.user_inputs['height'], step=1)
@@ -55,6 +55,7 @@ if not st.session_state.form_submitted:
 
         
         with col2:
+            st.write("Hieronder kan je specifieke ingrediënten of gerechten invullen voor een bepaalde maaltijd. Dit is optioneel: je kan dit ook leeglaten of slechts gedeeltelijk invullen.")
             st.subheader("Ontbijt")
             st.session_state.user_inputs['ingredient_ontbijt'] = st.text_input("Ingrediënt of gerecht voor ontbijt", value=st.session_state.user_inputs['ingredient_ontbijt'])
             
@@ -65,6 +66,11 @@ if not st.session_state.form_submitted:
             st.subheader("Diner")
             st.session_state.user_inputs['ingredient_diner'] = st.text_input("Ingrediënt of gerecht voor diner", value=st.session_state.user_inputs['ingredient_diner'])
 
+            st.subheader("Snack")
+            st.session_state.user_inputs['ingredient_snack'] = st.text_input("Ingrediënt of gerecht voor snack", value=st.session_state.user_inputs['ingredient_snack'])
+
+            st.subheader("Dessert")
+            st.session_state.user_inputs['ingredient_dessert'] = st.text_input("Ingrediënt of gerecht voor dessert", value=st.session_state.user_inputs['ingredient_dessert'])
         
         submitted = st.form_submit_button('Genereer maaltijdplan')
 
@@ -72,7 +78,7 @@ if not st.session_state.form_submitted:
         st.session_state.form_submitted = True
 
 if st.session_state.form_submitted:
-    user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch en {st.session_state.user_inputs['ingredient_diner']} voor diner"
+    user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
     col1, col2 = st.columns([0.7, 0.3])
     
     with col1:
