@@ -29,7 +29,7 @@ if 'form_submitted' not in st.session_state:
     st.session_state.form_submitted = False
 
 if 'generated' not in st.session_state:
-    st.session_state.form_generated = False
+    st.session_state.generated = False
 
 
 if 'user_inputs' not in st.session_state:
