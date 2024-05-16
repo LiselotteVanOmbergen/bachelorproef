@@ -11,9 +11,9 @@ from shopping_list import generate_shopping_list_dict
 st.set_page_config(layout="wide")
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
-st.title(":seedling: Veg<span style='color:green'>AI</span>n maaltijdplangenerator :seedling:")
-
-
+st.title(":seedling: Veg")  # Eerste deel van de titel
+st.markdown("<span style='color:green'>AI</span>", unsafe_allow_html=True)  # Woord "AI" in groen
+st.title("n maaltijdplangenerator :seedling:")  # Tweede deel van de tit
 
 cola, colb = st.columns(2)
 
