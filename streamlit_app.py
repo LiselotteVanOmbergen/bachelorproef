@@ -44,7 +44,7 @@ if 'user_inputs' not in st.session_state:
     }
 
 
-if not st.session_state.form_submitted or st.session_state.mealplan_generated:
+if not st.session_state.form_submitted:
     with st.form(key='user_input_form'):
         submitted = False
         col1, col2 = st.columns(2)
@@ -77,10 +77,8 @@ if not st.session_state.form_submitted or st.session_state.mealplan_generated:
             st.subheader(":ice_cream: Dessert")
             st.session_state.user_inputs['ingredient_dessert'] = st.text_input("Ingrediënt of gerecht voor dessert", value=st.session_state.user_inputs['ingredient_dessert'])
 
-            submitted = st.form_submit_button('Genereer maaltijdplan')
-
-    if submitted:
-        st.session_state.form_submitted = True
+            if st.form_submit_button('Genereer maaltijdplan'):
+                st.session_state.form_submitted = True
        
 
 if st.session_state.form_submitted:
