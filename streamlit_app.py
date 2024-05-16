@@ -119,7 +119,6 @@ if st.session_state.form_submitted:
 with col1:
     if st.session_state.gen_mealplan:
         st.text(st.session_state.gen_mealplan)
-        st.download_button("Download maaltijdplan", st.session_state.gen_mealplan, file_name="maaltijdplan.txt")
 
 
 with col2:
