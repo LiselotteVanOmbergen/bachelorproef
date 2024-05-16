@@ -101,6 +101,3 @@ if st.session_state.form_submitted:
         st.text(boodschappenlijst)
         st.download_button("Download boodschappenlijst", boodschappenlijst)
     
-
-if __name__ == "__main__":
-    main()
