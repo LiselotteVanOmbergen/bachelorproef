@@ -17,20 +17,20 @@ col1, col2 = st.columns(2)
 
 
   
+with st.form(key='user_input_form'):
+    with col1:
+        st.write(generate_motivation())
 
-with col1:
-    st.write(generate_motivation())
-
-    gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
-    age = st.number_input('Leeftijd', min_value=1,
+        gender = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'])
+        age = st.number_input('Leeftijd', min_value=1,
                         max_value=100, value=30, step=1)
-    height = st.number_input('Lengte (cm)', min_value=1,
+        height = st.number_input('Lengte (cm)', min_value=1,
                             max_value=220, value=170, step=1)
-    weight = st.number_input('Gewicht (kg)', min_value=1,
+        weight = st.number_input('Gewicht (kg)', min_value=1,
                             max_value=500, value=70, step=1)
-    activity_level = st.selectbox('Activiteitsniveau', [
+        activity_level = st.selectbox('Activiteitsniveau', [
         'Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'])
-    goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
+        goal = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen',
                                 '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'])
 
 # Invoervelden voor ontbijt
