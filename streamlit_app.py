@@ -116,13 +116,14 @@ if st.session_state.form_submitted:
     st.session_state.gen_shopping_list = boodschappenlijst
     st.session_state.form_submitted = False
 
+with col1:
+    if st.session_state.gen_mealplan:
+        st.text(st.session_state.gen_mealplan)
+        st.download_button("Download maaltijdplan", t.session_state.gen_mealplan, file_name="maaltijdplan.txt")
 
-if st.session_state.gen_mealplan:
-    st.text(st.session_state.gen_mealplan)
-    st.download_button("Download maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt")
 
-
-if st.session_state.gen_shopping_list:
-    st.write(st.session_state.gen_shopping_list)
-    st.download_button("Download boodschappenlijst",
-                       boodschappenlijst, file_name="boodschappenlijst.txt")
+with col2:
+    if st.session_state.gen_shopping_list:
+        st.write(st.session_state.gen_shopping_list)
+        st.download_button("Download boodschappenlijst",
+                       st.session_state.gen_shopping_list, file_name="boodschappenlijst.txt")
