@@ -43,8 +43,8 @@ if not st.session_state.form_submitted:
         
 
         with col1:
-            st.write(generate_motivation())
-            st.session_state.user_inputs['gender'] = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'], index=st.session_state.user_inputs['gender'])
+            
+            st.session_state.user_inputs['gender'] = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'], index=['Vrouw', 'Man', 'Non-binair persoon'].index(st.session_state.user_inputs['gender']) if st.session_state.user_inputs['gender'] else None)
             st.session_state.user_inputs['age'] = st.number_input('Leeftijd', min_value=1, max_value=100, value=st.session_state.user_inputs['age'], step=1)
             st.session_state.user_inputs['height'] = st.number_input('Lengte (cm)', min_value=1, max_value=220, value=st.session_state.user_inputs['height'], step=1)
             st.session_state.user_inputs['weight'] = st.number_input('Gewicht (kg)', min_value=1, max_value=500, value=st.session_state.user_inputs['weight'], step=1)
@@ -66,7 +66,6 @@ if not st.session_state.form_submitted:
         
         submitted = st.form_submit_button('Genereer maaltijdplan')
 
-    
     if submitted:
         st.session_state.form_submitted = True
 
@@ -82,3 +81,8 @@ if st.session_state.form_submitted:
     boodschappenlijst = dict_to_text(generate_shopping_list_dict(json.loads(mealplan)))
     st.text(boodschappenlijst)
     st.download_button("Download boodschappenlijst", boodschappenlijst)
+
+
+
+if st.button("Opnieuw invullen"):
+    st.session_state.form_submitted = False
