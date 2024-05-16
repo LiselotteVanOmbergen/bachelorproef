@@ -125,5 +125,9 @@ with col1:
 with col2:
     if st.session_state.gen_shopping_list:
         st.write(st.session_state.gen_shopping_list)
+
+with col1:
+        st.download_button("Download maaltijdplan", st.session_state.gen_mealplan, file_name="maaltijdplan.txt")
+with col2:
         st.download_button("Download boodschappenlijst",
                        st.session_state.gen_shopping_list, file_name="boodschappenlijst.txt")
