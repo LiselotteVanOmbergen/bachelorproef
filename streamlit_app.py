@@ -106,6 +106,7 @@ if st.session_state.form_submitted:
         st.session_state.gen_mealplan = dict_to_text(json.loads(mealplan))
         st.text(st.session_state.gen_mealplan)
         if st.download_button("Download maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt"):
+            st.write(st.session_state.gen_mealplan)
             pass  
 
     with col2:
@@ -114,5 +115,6 @@ if st.session_state.form_submitted:
         st.session_state.gen_shopping_list = boodschappenlijst
         st.text(st.session_state.gen_shopping_list)
         if st.download_button("Download boodschappenlijst", boodschappenlijst, file_name="boodschappenlijst.txt"):
+            st.write(st.session_state.gen_shopping_list)
             pass  
 
