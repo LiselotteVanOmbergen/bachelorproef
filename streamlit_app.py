@@ -28,6 +28,9 @@ with colb.container(height=200):
 if 'form_submitted' not in st.session_state:
     st.session_state.form_submitted = False
 
+if 'generated' not in st.session_state:
+    st.session_state.form_generated = False
+
 
 if 'user_inputs' not in st.session_state:
     st.session_state.user_inputs = {
@@ -45,6 +48,12 @@ if 'user_inputs' not in st.session_state:
     }
 
 placeholder = st.empty()
+
+
+if 'gen_meal' not in st.session_state:
+    st.session_state.gen_meal = ''
+if 'gen__shopping_list' not in st.session_state:
+    st.session_state.gen_shopping_list = ''
 
 if not st.session_state.form_submitted:
     with placeholder.form(key='user_input_form'):
@@ -95,14 +104,20 @@ if st.session_state.form_submitted:
     with col1:
         mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
                                     'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
-        st.text(dict_to_text(json.loads(mealplan)))
-        if st.download_button("Download Maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt"):
-            pass  
+        st.session_state.gen_meal = (dict_to_text(json.loads(mealplan)))
+        st.text(st.session_state.gen_meal)
+        st.session_state.gen_meal = (dict_to_text(json.loads(mealplan)))
+        
+              
 
     with col2:
-        boodschappenlijst = dict_to_text(
+        st.session_state.gen_shopping_list = dict_to_text(
             generate_shopping_list_dict(json.loads(mealplan)))
-        st.text(boodschappenlijst)
-        if st.download_button("Download Boodschappenlijst", boodschappenlijst, file_name="boodschappenlijst.txt"):
-            pass  
+        st.text(st.session_state.gen_shopping_list)
+    st.session_state.form_generated = True       
 
+if st.session_state.generated:
+    with col1:
+        st.download_button("Download Maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt")
+    with col2:
+        st.download_button("Download Boodschappenlijst", st.session_state_gen_shopping, file_name="boodschappenlijst.txt")
