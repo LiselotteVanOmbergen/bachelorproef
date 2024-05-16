@@ -84,5 +84,5 @@ if st.session_state.form_submitted:
 
 
 
-if st.button("Opnieuw invullen"):
-    st.session_state.form_submitted = False
+    if st.button("Opnieuw invullen"):
+        st.session_state.form_submitted = False
