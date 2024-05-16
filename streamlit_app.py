@@ -46,6 +46,9 @@ if 'user_inputs' not in st.session_state:
 
 placeholder = st.empty()
 
+gen_mealplan = ""
+gen_shopping_list = ""
+
 if not st.session_state.form_submitted:
     with placeholder.form(key='user_input_form'):
         submitted = False
@@ -81,40 +84,22 @@ if not st.session_state.form_submitted:
 
             if st.form_submit_button('Genereer maaltijdplan'):
                 st.session_state.form_submitted = True
-                #placeholder = st.empty()
-       
+                user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
 
+                gen_mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
+                                                'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
+                gen_shopping_list = dict_to_text(
+                generate_shopping_list_dict(json.loads(gen_mealplan)))
 
-if 'gen_mealplan' not in st.session_state:
-    st.session_state.gen_mealplan = ""
+    # Display meal plan and shopping list even after download button click
+    if gen_mealplan:
+        with col1:
+            st.header(' :carrot: Jouw maaltijdplan')
+            st.text(dict_to_text(json.loads(gen_mealplan)))
+            st.download_button("Download maaltijdplan", dict_to_text(json.loads(gen_mealplan)), file_name="maaltijdplan.txt")
 
-if 'gen_shopping_list' not in st.session_state:
-    st.session_state.gen_shopping_list = ""
-
-if st.session_state.form_submitted:
-    user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
-    col1, col2 = st.columns([0.7, 0.3])
-    
-
-    with col1:
-        st.header(' :carrot: Jouw maaltijdplan')
-    with col2:
-        st.header(' :shopping_trolley: Boodschappenlijst')
-    with col1:
-        mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
-                                    'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
-        st.session_state.gen_mealplan = dict_to_text(json.loads(mealplan))
-        st.text(st.session_state.gen_mealplan)
-        st.download_button("Download maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt")
-        st.write(st.session_state.gen_mealplan)
-       
-
-    with col2:
-        boodschappenlijst = dict_to_text(
-            generate_shopping_list_dict(json.loads(mealplan)))
-        st.session_state.gen_shopping_list = boodschappenlijst
-        st.text(st.session_state.gen_shopping_list)
-        st.download_button("Download boodschappenlijst", boodschappenlijst, file_name="boodschappenlijst.txt")
-        st.write(st.session_state.gen_shopping_list)
-             
-        st.session_state.form_submitted = False
+    if gen_shopping_list:
+        with col2:
+            st.header(' :shopping_trolley: Boodschappenlijst')
+            st.text(gen_shopping_list)
+            st.download_button("Download boodschappenlijst", gen_shopping_list, file_name="boodschappenlijst.txt")
