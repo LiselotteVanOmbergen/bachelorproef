@@ -30,6 +30,22 @@ if 'form_submitted' not in st.session_state:
 if 'mealplan_generated' not in st.session_state:
     st.session_state.mealplan_generated = False
 
+if 'user_inputs' not in st.session_state:
+    st.session_state.user_inputs = {
+        'gender': None,
+        'age': 30,
+        'height': 170,
+        'weight': 70,
+        'activity_level': 'Gemiddeld actief',
+        'goal': 'Onderhouden',
+        'ingredient_ontbijt': '',
+        'ingredient_lunch': '',
+        'ingredient_diner': '',
+        'ingredient_snack':'',
+        'ingredient_dessert':''
+    }
+
+
 if not st.session_state.form_submitted or st.session_state.mealplan_generated:
     with st.form(key='user_input_form'):
         submitted = False
