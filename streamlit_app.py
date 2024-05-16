@@ -128,16 +128,10 @@ st.text(st.session_state.gen_meal)
 st.text(st.session_state.gen_shopping_list)
 
 
-def print_meal():
-        st.text(st.session_state.gen_meal)
-
-def print_shopping_list():
-        st.text(st.session_state.gen_shopping_list)
-
 if st.session_state.generated:
-        if st.download_button("Download maaltijdplan", st.session_state.gen_meal,
-                           file_name="maaltijdplan.txt"):
-            print_meal()
-        if st.download_button("Download boodschappenlijst", st.session_state.gen_shopping_list,
-                         file_name="boodschappenlijst.txt"):
-            print_shopping_list()
+        st.download_button("Download maaltijdplan", st.session_state.gen_meal,
+                           file_name="maaltijdplan.txt")
+            
+        st.download_button("Download boodschappenlijst", st.session_state.gen_shopping_list,
+                         file_name="boodschappenlijst.txt")
+           
