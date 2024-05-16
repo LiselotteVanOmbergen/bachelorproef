@@ -19,15 +19,13 @@ row = st.columns(2)
 col1, col2 = row
 
 for col in row:
-    tile = col.container(height=120)
-    tile.title(":seedling:")
-
+    tile = col.container(height=1, border=None)
 
 
 if 'motivation_content' not in st.session_state:
     st.session_state.motivation_content = generate_motivation()
 
-with col1.container(height=20):
+with col1.container(height=300):
     st.write(st.session_state.motivation_content)
         
 if 'form_submitted' not in st.session_state:
