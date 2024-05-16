@@ -122,7 +122,7 @@ if st.session_state.gen_mealplan:
     st.download_button("Download maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt")
 
 
-if st.session_state.gen_shoping_list:
+if st.session_state.gen_shopping_list:
     st.write(st.session_state.gen_shopping_list)
     st.download_button("Download boodschappenlijst",
                        boodschappenlijst, file_name="boodschappenlijst.txt")
