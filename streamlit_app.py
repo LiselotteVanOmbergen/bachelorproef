@@ -135,9 +135,10 @@ def print_meal():
 
 
 if st.session_state.generated:
-    with col1:
+    col3, col4 = st.columns([0.7, 0.3])
+    with col3:
         st.download_button("Download Maaltijdplan", st.session_state.gen_meal,
                            file_name="maaltijdplan.txt",  on_click=print_shopping_list())
-    with col2:
+    with col4:
         st.download_button("Download Boodschappenlijst", st.session_state.gen_shopping_list,
                            file_name="boodschappenlijst.txt", on_click=print_shopping_list())
