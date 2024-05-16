@@ -115,7 +115,7 @@ if st.session_state.form_submitted:
             'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
         st.session_state.gen_meal = (dict_to_text(json.loads(mealplan)))
         st.text(st.session_state.gen_meal)
-        st.session_state.gen_meal = (dict_to_text(json.loads(mealplan)))
+        
 
     with col2:
         st.session_state.gen_shopping_list = dict_to_text(
