@@ -136,7 +136,7 @@ if st.session_state.generated:
     col3, col4 = st.columns([0.7, 0.3])
     with col3:
         if st.download_button("Download Maaltijdplan", st.session_state.gen_meal,
-                           file_name="maaltijdplan.txt":
+                           file_name="maaltijdplan.txt"):
             print_meal()
     with col4:
         if st.download_button("Download Boodschappenlijst", st.session_state.gen_shopping_list,
