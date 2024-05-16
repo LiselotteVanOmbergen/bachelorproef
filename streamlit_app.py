@@ -90,6 +90,9 @@ if st.session_state.form_submitted:
 
     with col1:
         st.header(' :carrot: Jouw maaltijdplan')
+    with col2:
+        st.header(' :shopping_trolley: Boodschappenlijst')
+    with col1:
         mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
                                     'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
         st.text(dict_to_text(json.loads(mealplan)))
