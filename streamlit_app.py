@@ -19,7 +19,7 @@ cola, colb = st.columns(2)
 if 'motivation_content' not in st.session_state:
     st.session_state.motivation_content = generate_motivation()
 
-with cola.st.container(height=200):
+with cola.container(height=200):
     st.write(st.session_state.motivation_content)
 with colb.container(border=None):
     st.write("supplement B2 en omage 3- vetzuren")
