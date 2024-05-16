@@ -106,10 +106,10 @@ if st.session_state.form_submitted:
     user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
     col1, col2 = st.columns([0.7, 0.3])
     st.session_state.form_submitted = False
-    with col1:
-        st.header(' :carrot: Jouw maaltijdplan')
-    with col2:
-        st.header(' :shopping_trolley: Boodschappenlijst')
+    #with col1:
+        #st.header(' :carrot: Jouw maaltijdplan')
+    #with col2:
+        #st.header(' :shopping_trolley: Boodschappenlijst')
     with col1:
         mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
             'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
