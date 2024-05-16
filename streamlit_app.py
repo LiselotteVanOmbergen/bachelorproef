@@ -19,8 +19,12 @@ cola, colb = st.columns(2)
 if 'motivation_content' not in st.session_state:
     st.session_state.motivation_content = generate_motivation()
 
+import streamlit as st
+
 with cola.container(height=200):
     st.write(st.session_state.motivation_content)
+    st.markdown('<span style="color:green">Green Text</span>', unsafe_allow_html=True)
+
 with colb.container(height=200):
     st.write("Vergeet niet om dagelijks een vitamine B12-supplement in te nemen, aangezien deze vitamine van nature alleen voorkomt in dierlijke producten. Naast vitamine B12, kunnen ook andere supplementen worden overwogen om ervoor te zorgen dat je alle essentiële voedingsstoffen binnenkrijgt. Denk hierbij aan vitamine D, omega-3 vetzuren, calcium en ijzer.")
 
@@ -58,20 +62,20 @@ if not st.session_state.form_submitted:
         
         with col2:
             st.write("Hieronder kan je specifieke ingrediënten of gerechten invullen voor een bepaalde maaltijd. Dit is optioneel: je kan dit ook leeglaten of slechts gedeeltelijk invullen.")
-            st.subheader("Ontbijt")
+            st.subheader(":pancakes: Ontbijt")
             st.session_state.user_inputs['ingredient_ontbijt'] = st.text_input("Ingrediënt of gerecht voor ontbijt", value=st.session_state.user_inputs['ingredient_ontbijt'])
             
-            st.subheader("Lunch")
+            st.subheader(":sandwich: Lunch")
             st.session_state.user_inputs['ingredient_lunch'] = st.text_input("Ingrediënt of gerecht voor lunch", value=st.session_state.user_inputs['ingredient_lunch'])
             
 
-            st.subheader("Diner")
+            st.subheader(":spaghetti: Diner")
             st.session_state.user_inputs['ingredient_diner'] = st.text_input("Ingrediënt of gerecht voor diner", value=st.session_state.user_inputs['ingredient_diner'])
 
-            st.subheader("Snack")
+            st.subheader(":cookie: Snack")
             st.session_state.user_inputs['ingredient_snack'] = st.text_input("Ingrediënt of gerecht voor snack", value=st.session_state.user_inputs['ingredient_snack'])
 
-            st.subheader("Dessert")
+            st.subheader(":ice_cream: Dessert")
             st.session_state.user_inputs['ingredient_dessert'] = st.text_input("Ingrediënt of gerecht voor dessert", value=st.session_state.user_inputs['ingredient_dessert'])
         
             submitted = st.form_submit_button('Genereer maaltijdplan')
