@@ -59,7 +59,7 @@ if not st.session_state.form_submitted:
 
         
         with col2:
-            st.write("Hieronder kan je specifieke ingrediënten of gerechten invullen voor een bepaalde maaltijd. Dit is optioneel: je kan dit ook leeglaten of slechts gedeeltelijk invullen.")
+            st.write("Vul hieronder specifiek gewenste ingrediënten of gerechten voor een bepaalde maaltijd in. Dit is optioneel: je kan dit ook leeglaten of slechts gedeeltelijk invullen.")
             st.subheader(":pancakes: Ontbijt")
             st.session_state.user_inputs['ingredient_ontbijt'] = st.text_input("Ingrediënt of gerecht voor ontbijt", value=st.session_state.user_inputs['ingredient_ontbijt'])
             
