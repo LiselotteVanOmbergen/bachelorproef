@@ -114,13 +114,13 @@ if st.session_state.form_submitted:
         mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
             'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
         st.session_state.gen_meal = (dict_to_text(json.loads(mealplan)))
-        st.text(st.session_state.gen_meal)
+        #st.text(st.session_state.gen_meal)
         
 
     with col2:
         st.session_state.gen_shopping_list = dict_to_text(
             generate_shopping_list_dict(json.loads(mealplan)))
-        st.text(st.session_state.gen_shopping_list)
+        #st.text(st.session_state.gen_shopping_list)
     st.session_state.generated = True
 
 
