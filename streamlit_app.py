@@ -21,7 +21,7 @@ if 'motivation_content' not in st.session_state:
 
 with cola.container(height=200):
     st.write(st.session_state.motivation_content)
-with colb.container(border=None):
+with colb.container(height=200):
     st.write("Vergeet niet om dagelijks een vitamine B12-supplement in te nemen, aangezien deze vitamine van nature alleen voorkomt in dierlijke producten. Naast vitamine B12, kunnen ook andere supplementen worden overwogen om ervoor te zorgen dat je alle essentiële voedingsstoffen binnenkrijgt. Denk hierbij aan vitamine D, omega-3 vetzuren, calcium en ijzer.")
 
 if 'form_submitted' not in st.session_state:
@@ -37,7 +37,9 @@ if 'user_inputs' not in st.session_state:
         'goal': 'Onderhouden',
         'ingredient_ontbijt': '',
         'ingredient_lunch': '',
-        'ingredient_diner': ''
+        'ingredient_diner': '',
+        'ingredient_snack':'',
+        'ingredient_dessert':''
     }
 
 if not st.session_state.form_submitted:
