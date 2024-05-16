@@ -85,7 +85,7 @@ if 'form_submitted' not in st.session_state:
 
 if 'user_inputs' not in st.session_state:
     st.session_state.user_inputs = {
-        'gender': "None",
+        'gender': None,
         'age': 30,
         'height': 170,
         'weight': 70,
