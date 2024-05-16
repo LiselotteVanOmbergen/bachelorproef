@@ -16,16 +16,18 @@ st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
 row = st.columns(2)
 
+col1, col2 = row
+
 for col in row:
     tile = col.container(height=120)
     tile.title(":seedling:")
 
-col1, col2 = row
+
 
 if 'motivation_content' not in st.session_state:
     st.session_state.motivation_content = generate_motivation()
 
-with col1:
+with col1.container(height=20):
     st.write(st.session_state.motivation_content)
         
 if 'form_submitted' not in st.session_state:
@@ -92,7 +94,3 @@ if st.session_state.form_submitted:
         st.text(boodschappenlijst)
         st.download_button("Download boodschappenlijst", boodschappenlijst)
 
-
-
-    if st.button("Opnieuw invullen"):
-        st.session_state.form_submitted = False
