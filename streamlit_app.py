@@ -27,8 +27,6 @@ with colb.container(height=200):
 if 'form_submitted' not in st.session_state:
     st.session_state.form_submitted = False
 
-if 'mealplan_generated' not in st.session_state:
-    st.session_state.mealplan_generated = False
 
 if 'user_inputs' not in st.session_state:
     st.session_state.user_inputs = {
@@ -83,9 +81,9 @@ if not st.session_state.form_submitted or st.session_state.mealplan_generated:
 
     if submitted:
         st.session_state.form_submitted = True
-        st.session_state.mealplan_generated = True
+       
 
-if st.session_state.mealplan_generated:
+if st.session_state.form_submitted:
     user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
     col1, col2 = st.columns([0.7, 0.3])
 
@@ -101,7 +99,8 @@ if st.session_state.mealplan_generated:
             generate_shopping_list_dict(json.loads(mealplan)))
         st.text(boodschappenlijst)
         st.download_button("Download boodschappenlijst", boodschappenlijst)
+    
 
-        if st.button("Nieuw maaltijdplan"):
+    if st.button("Nieuw maaltijdplan"):
             st.session_state.form_submitted = False
-            st.session_state.mealplan_generated = False
+           
