@@ -52,7 +52,7 @@ placeholder = st.empty()
 
 if 'gen_meal' not in st.session_state:
     st.session_state.gen_meal = ''
-if 'gen__shopping_list' not in st.session_state:
+if 'gen_shopping_list' not in st.session_state:
     st.session_state.gen_shopping_list = ''
 
 if not st.session_state.form_submitted:
