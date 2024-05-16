@@ -13,7 +13,14 @@ openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
 st.title(":seedling: Vegan maaltijdplangenerator :seedling:")
 
-col1, col2 = st.columns(2)
+
+row = st.columns(2)
+
+for col in row:
+    tile = col.container(height=120)
+    tile.title(":seedling:")
+
+col1, col2 = row
 
 if 'motivation_content' not in st.session_state:
     st.session_state.motivation_content = generate_motivation()
@@ -36,7 +43,6 @@ if 'user_inputs' not in st.session_state:
         'ingredient_lunch': '',
         'ingredient_diner': ''
     }
-
 
 if not st.session_state.form_submitted:
     with st.form(key='user_input_form'):
