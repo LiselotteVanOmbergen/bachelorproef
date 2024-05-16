@@ -19,7 +19,7 @@ from loader import load_pdf
 
 # voorbeelden
 voorbeeld_voedingswaarden = {
-  "energiebehoefte": 1947,
+  "energiebehoefte": "1947 kcal",
   "koolhydraten": "219-274 gram",
   "eiwitten": "94-119 gram",
   "vetten": "63-78 gram",
