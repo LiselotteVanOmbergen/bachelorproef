@@ -94,7 +94,7 @@ if 'gen_shopping_list' not in st.session_state:
 if st.session_state.form_submitted:
     user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
     col1, col2 = st.columns([0.7, 0.3])
-    st.session_state.form_submitted = False
+    
 
     with col1:
         st.header(' :carrot: Jouw maaltijdplan')
@@ -107,7 +107,7 @@ if st.session_state.form_submitted:
         st.text(st.session_state.gen_mealplan)
         if st.download_button("Download maaltijdplan", dict_to_text(json.loads(mealplan)), file_name="maaltijdplan.txt"):
             st.write(st.session_state.gen_mealplan)
-            pass  
+       
 
     with col2:
         boodschappenlijst = dict_to_text(
@@ -116,5 +116,5 @@ if st.session_state.form_submitted:
         st.text(st.session_state.gen_shopping_list)
         if st.download_button("Download boodschappenlijst", boodschappenlijst, file_name="boodschappenlijst.txt"):
             st.write(st.session_state.gen_shopping_list)
-            pass  
-
+             
+        st.session_state.form_submitted = False
