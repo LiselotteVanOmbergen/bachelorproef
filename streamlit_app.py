@@ -4,7 +4,7 @@ import openai
 import json
 from rag_motivation import generate_motivation
 from rag_dietary_requirements import generate_dietary_requirements
-from rag_mealplan import generate_mealplan
+from rag_meal_plan import generate_meal_plan
 from dict_to_text import dict_to_text
 from shopping_list import generate_shopping_list_dict
 
@@ -97,14 +97,14 @@ if st.session_state.form_submitted:
     st.session_state.form_submitted = False
 
     with col1:
-        mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
+        meal_plan = generate_meal_plan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
             'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
-        st.session_state.gen_meal = (dict_to_text(json.loads(mealplan)))
+        st.session_state.gen_meal = (dict_to_text(json.loads(meal_plan)))
         # st.text(st.session_state.gen_meal)
 
     with col2:
         st.session_state.gen_shopping_list = dict_to_text(
-            generate_shopping_list_dict(json.loads(mealplan)))
+            generate_shopping_list_dict(json.loads(meal_plan)))
         # st.text(st.session_state.gen_shopping_list)
     st.session_state.generated = True
 

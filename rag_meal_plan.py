@@ -131,7 +131,7 @@ def random_num():
   return random.randint(0, 1389)
 
 
-def generate_mealplan(dietary_requirements, user_requirements):
+def generate_meal_plan(dietary_requirements, user_requirements):
     df = pd.DataFrame()
     paths = Path("./data/recipes").glob('**/*.csv')
     for path in paths:
@@ -144,7 +144,7 @@ def generate_mealplan(dietary_requirements, user_requirements):
 
     embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
-    vectorstore_mealplan = Qdrant.from_documents(
+    vectorstore_meal_plan = Qdrant.from_documents(
         recipes,
         embeddings_model,
         location=":memory:",  # Local mode with in-memory storage only
@@ -178,7 +178,7 @@ def generate_mealplan(dietary_requirements, user_requirements):
                      model="gpt-3.5-turbo", response_format={"type": "json_object"})
     retriever_maaltijdplan = SelfQueryRetriever.from_llm(
         llm,
-        vectorstore_mealplan,
+        vectorstore_meal_plan,
         document_content_description,
         metadata_field_info,
         verbose=True,
