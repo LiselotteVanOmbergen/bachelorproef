@@ -10,14 +10,12 @@ from langchain.chains.query_constructor.base import AttributeInfo
 from langchain.retrievers.self_query.base import SelfQueryRetriever
 import streamlit as st
 import os
-from langchain_community.vectorstores import FAISS
-from langchain_community.vectorstores import LanceDB
 from langchain_community.vectorstores import Qdrant
 from langchain_core.runnables import RunnableParallel
 from pathlib import Path
 import random
 
-# voorbeeld
+
 voorbeeld_maaltijdplan = {
     "maaltijdplan": {
         "ontbijt": {
@@ -128,6 +126,7 @@ voorbeeld_maaltijdplan = {
 
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
+
 def random_num():
   return random.randint(0, 1389)
 
@@ -139,25 +138,18 @@ def generate_mealplan(dietary_requirements, user_requirements):
         temp_df = pd.read_csv(filepath_or_buffer=str(path))
         temp_df = temp_df.rename(columns={'Unnamed: 0': 'id'})
     df = pd.concat([df, temp_df], ignore_index=True)
-        
-    
-    #Document loader
+
     loader = DataFrameLoader(df, page_content_column="ingredients")
     recipes = loader.load()
 
-    #Embeddings
-    embeddings_model = OpenAIEmbeddings(model = "text-embedding-3-small")
+    embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
-    # Vectorstores
     vectorstore_mealplan = Qdrant.from_documents(
-    recipes,
-    embeddings_model,
-    location=":memory:",  # Local mode with in-memory storage only
-    collection_name="my_documents",
-)
-    #vectorstore_mealplan = Qdrant.from_documents(recipes, embeddings_model)
-    
-
+        recipes,
+        embeddings_model,
+        location=":memory:",  # Local mode with in-memory storage only
+        collection_name="my_documents",
+    )
 
     metadata_field_info = [
         AttributeInfo(
@@ -173,27 +165,26 @@ def generate_mealplan(dietary_requirements, user_requirements):
             type="string",
         ),
 
-           AttributeInfo(
+        AttributeInfo(
             name="preparation",
             description="Bereidingswijze",
             type="string",
         ),
 
 
-        ]
+    ]
     document_content_description = "Vegan recepten"
-    llm = ChatOpenAI(openai_api_key= openai.api_key, model="gpt-3.5-turbo", response_format = {"type": "json_object" })
+    llm = ChatOpenAI(openai_api_key=openai.api_key,
+                     model="gpt-3.5-turbo", response_format={"type": "json_object"})
     retriever_maaltijdplan = SelfQueryRetriever.from_llm(
         llm,
         vectorstore_mealplan,
         document_content_description,
         metadata_field_info,
-        verbose = True,
+        verbose=True,
         search_type='similarity',
         search_kwargs={'k': 10}
     )
-
-
 
     template = """Je bent een Nederlandstalige plantaardige voedingscoach die uitsluitend Nederlandstalige plantaardige maaltijdplannen opstelt op basis van de gegeven context. 
     Stel een dagelijks plantaardig maaltijdplan op in json met exact dezelfde structuur als het gegeven voorbeeld, maar met andere gerechten dan in het gegeven voorbeeld. 
@@ -210,23 +201,23 @@ def generate_mealplan(dietary_requirements, user_requirements):
     question = ""
     if user_requirements:
         question += f"Gebruik {user_requirements}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
-    else: 
+    else:
         question += f"Gebruik recepten met id kleiner dan {random_num()} en groter dan {int({random_num()} - 10)}. {voorbeeld_maaltijdplan}, {dietary_requirements}"
-
 
     def format_docs(documents):
         return "\n\n".join([d.page_content for d in documents])
     rag_chain_from_docs = (
-        RunnablePassthrough.assign(context=(lambda x: format_docs(x["context"])))
+        RunnablePassthrough.assign(
+            context=(lambda x: format_docs(x["context"])))
         | prompt
         | llm
         | StrOutputParser()
     )
 
     rag_chain_with_source = RunnableParallel(
-    {"context": retriever_maaltijdplan, "question": RunnablePassthrough(), "dietary_requirements" :RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
+        {"context": retriever_maaltijdplan, "question": RunnablePassthrough(
+        ), "dietary_requirements": RunnablePassthrough(), "voorbeeld_maaltijdplan": RunnablePassthrough()}
     ).assign(answer=rag_chain_from_docs)
-   # answer2 = rag_chain_with_source.invoke(f" id, {random_num()}")
+
     answer = rag_chain_with_source.invoke(f"{question}")
     return answer["answer"]
-

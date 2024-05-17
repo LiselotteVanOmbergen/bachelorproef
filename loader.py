@@ -1,7 +1,7 @@
-
 from pathlib import Path
-from langchain_community.document_loaders import PyPDFLoader 
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.document_loaders import DataFrameLoader
+
 
 def list_pdf(data_dir):
     paths = Path(data_dir).glob('**/*.pdf')
@@ -17,4 +17,3 @@ def load_pdf(data_dir):
         loader = PyPDFLoader(path)
         pdfs.extend(loader.load_and_split())
     return pdfs
-

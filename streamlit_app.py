@@ -8,17 +8,15 @@ from rag_mealplan import generate_mealplan
 from dict_to_text import dict_to_text
 from shopping_list import generate_shopping_list_dict
 
-st.set_page_config(layout="wide")
-
 openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 
+st.set_page_config(layout="wide")
 st.title(":seedling: Veg:green[AI]n maaltijdplangenerator :seedling:")
-
-cola, colb = st.columns(2)
 
 if 'motivation_content' not in st.session_state:
     st.session_state.motivation_content = generate_motivation()
 
+cola, colb = st.columns(2)
 with cola.container(height=200):
     st.write(st.session_state.motivation_content)
 
@@ -30,7 +28,6 @@ if 'form_submitted' not in st.session_state:
 
 if 'generated' not in st.session_state:
     st.session_state.generated = False
-
 
 if 'user_inputs' not in st.session_state:
     st.session_state.user_inputs = {
@@ -49,7 +46,6 @@ if 'user_inputs' not in st.session_state:
 
 placeholder = st.empty()
 
-
 if 'gen_meal' not in st.session_state:
     st.session_state.gen_meal = ''
 if 'gen_shopping_list' not in st.session_state:
@@ -59,7 +55,6 @@ if not st.session_state.form_submitted:
     with placeholder.form(key='user_input_form'):
         submitted = False
         col1, col2 = st.columns(2)
-
         with col1:
             st.write("Vul hieronder je persoonlijke gegevens in.")
             st.session_state.user_inputs['gender'] = st.selectbox('Geslacht', ['Vrouw', 'Man', 'Non-binair persoon'], index=[
@@ -74,44 +69,33 @@ if not st.session_state.form_submitted:
                                                                           'Sedentair', 'Licht actief', 'Gemiddeld actief', 'Zeer actief'].index(st.session_state.user_inputs['activity_level']))
             st.session_state.user_inputs['goal'] = st.selectbox('Doel', ['0.5 kilo per week aankomen', '1 kilo per week aankomen', '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'], index=[
                                                                 '0.5 kilo per week aankomen', '1 kilo per week aankomen', '0.5 kilo per week afvallen', '1 kilo per week afvallen', 'Onderhouden'].index(st.session_state.user_inputs['goal']))
-
         with col2:
             st.write("Vul hieronder specifiek gewenste ingrediënten of gerechten in voor een bepaalde maaltijd. Dit is optioneel: je kan dit ook oningevuld laten of slechts gedeeltelijk invullen.")
             st.subheader(":pancakes: Ontbijt")
             st.session_state.user_inputs['ingredient_ontbijt'] = st.text_input(
                 "Ingrediënt of gerecht voor ontbijt", value=st.session_state.user_inputs['ingredient_ontbijt'])
-
             st.subheader(":sandwich: Lunch")
             st.session_state.user_inputs['ingredient_lunch'] = st.text_input(
                 "Ingrediënt of gerecht voor lunch", value=st.session_state.user_inputs['ingredient_lunch'])
-
             st.subheader(":spaghetti: Diner")
             st.session_state.user_inputs['ingredient_diner'] = st.text_input(
                 "Ingrediënt of gerecht voor diner", value=st.session_state.user_inputs['ingredient_diner'])
-
             st.subheader(":cookie: Snack")
             st.session_state.user_inputs['ingredient_snack'] = st.text_input(
                 "Ingrediënt of gerecht voor snack", value=st.session_state.user_inputs['ingredient_snack'])
-
             st.subheader(":ice_cream: Dessert")
             st.session_state.user_inputs['ingredient_dessert'] = st.text_input(
                 "Ingrediënt of gerecht voor dessert", value=st.session_state.user_inputs['ingredient_dessert'])
-
             if st.form_submit_button('Genereer maaltijdplan'):
                 st.session_state.form_submitted = True
                 del st.session_state.gen_shopping_list
                 del st.session_state.gen_meal
-                # placeholder = st.empty()
-
 
 if st.session_state.form_submitted:
     user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
     col1, col2 = st.columns([0.7, 0.3])
     st.session_state.form_submitted = False
-    # with col1:
-      # st.header(' :carrot: Jouw maaltijdplan')
-    # with col2:
-      # st.header(' :shopping_trolley: Boodschappenlijst')
+
     with col1:
         mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
             'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
@@ -124,21 +108,19 @@ if st.session_state.form_submitted:
         # st.text(st.session_state.gen_shopping_list)
     st.session_state.generated = True
 
-
 col3, col4 = st.columns([0.7, 0.3])
 with col3:
-      st.header(' :carrot: Jouw maaltijdplan')
-       st.text(st.session_state.gen_meal)
+    st.header(' :carrot: Jouw maaltijdplan')
+    st.text(st.session_state.gen_meal)
 with col4:
-      st.header(' :shopping_trolley: Boodschappenlijst')
-       st.text(st.session_state.gen_shopping_list)
+    st.header(' :shopping_trolley: Boodschappenlijst')
+    st.text(st.session_state.gen_shopping_list)
 
 if st.session_state.generated:
-      col5, col6 = st.columns([0.7, 0.3])
-       with col5:
-            st.download_button("Download maaltijdplan", st.session_state.gen_meal,
-                               file_name="maaltijdplan.txt")
-
-        with col6:
-            st.download_button("Download boodschappenlijst", st.session_state.gen_shopping_list,
-                               file_name="boodschappenlijst.txt")
+    col5, col6 = st.columns([0.7, 0.3])
+    with col5:
+        st.download_button("Download maaltijdplan", st.session_state.gen_meal,
+                           file_name="maaltijdplan.txt")
+    with col6:
+        st.download_button("Download boodschappenlijst", st.session_state.gen_shopping_list,
+                           file_name="boodschappenlijst.txt")
