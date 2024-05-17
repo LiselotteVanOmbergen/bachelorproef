@@ -108,39 +108,37 @@ if st.session_state.form_submitted:
     user_requirements = f"{st.session_state.user_inputs['ingredient_ontbijt']} voor ontbijt, {st.session_state.user_inputs['ingredient_lunch']} voor lunch, {st.session_state.user_inputs['ingredient_diner']} voor diner, {st.session_state.user_inputs['ingredient_snack']} voor snack en {st.session_state.user_inputs['ingredient_dessert']} voor dessert"
     col1, col2 = st.columns([0.7, 0.3])
     st.session_state.form_submitted = False
-    #with col1:
-        #st.header(' :carrot: Jouw maaltijdplan')
-    #with col2:
-        #st.header(' :shopping_trolley: Boodschappenlijst')
+    # with col1:
+      # st.header(' :carrot: Jouw maaltijdplan')
+    # with col2:
+      # st.header(' :shopping_trolley: Boodschappenlijst')
     with col1:
         mealplan = generate_mealplan(generate_dietary_requirements(st.session_state.user_inputs['gender'], st.session_state.user_inputs['age'], st.session_state.user_inputs[
             'height'], st.session_state.user_inputs['weight'],  st.session_state.user_inputs['activity_level'], st.session_state.user_inputs['goal']), user_requirements)
         st.session_state.gen_meal = (dict_to_text(json.loads(mealplan)))
-        #st.text(st.session_state.gen_meal)
-        
+        # st.text(st.session_state.gen_meal)
 
     with col2:
         st.session_state.gen_shopping_list = dict_to_text(
             generate_shopping_list_dict(json.loads(mealplan)))
-        #st.text(st.session_state.gen_shopping_list)
+        # st.text(st.session_state.gen_shopping_list)
     st.session_state.generated = True
 
 
 col3, col4 = st.columns([0.7, 0.3])
 with col3:
-        st.header(' :carrot: Jouw maaltijdplan')
-        st.text(st.session_state.gen_meal)
+      st.header(' :carrot: Jouw maaltijdplan')
+       st.text(st.session_state.gen_meal)
 with col4:
-        st.header(' :shopping_trolley: Boodschappenlijst')
-        st.text(st.session_state.gen_shopping_list)
+      st.header(' :shopping_trolley: Boodschappenlijst')
+       st.text(st.session_state.gen_shopping_list)
 
 if st.session_state.generated:
-        col5, col6 = st.columns([0.7, 0.3])
-        with col5:
-             st.download_button("Download maaltijdplan", st.session_state.gen_meal,
-                           file_name="maaltijdplan.txt")
-                           
-        with col6:    
+      col5, col6 = st.columns([0.7, 0.3])
+       with col5:
+            st.download_button("Download maaltijdplan", st.session_state.gen_meal,
+                               file_name="maaltijdplan.txt")
+
+        with col6:
             st.download_button("Download boodschappenlijst", st.session_state.gen_shopping_list,
-                         file_name="boodschappenlijst.txt")
-           
+                               file_name="boodschappenlijst.txt")
