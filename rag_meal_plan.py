@@ -199,13 +199,8 @@ def generate_meal_plan(dietary_requirements, user_requirements):
     prompt = ChatPromptTemplate.from_template(template)
 
     question = ""
-    if user_requirements:
-        question += f"Gebruik {user_requirements}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
-    else:
-        num1 = random_num()
-        num2 = num1 - 10
-        question += f"Gebruik recepten met id kleiner dan {num1} en groter dan {num2}. {voorbeeld_maaltijdplan}, {dietary_requirements}"
-
+    question += f"Gebruik {user_requirements}.  {voorbeeld_maaltijdplan}, {dietary_requirements}"
+    
 
     def format_docs(documents):
         return "\n\n".join([d.page_content for d in documents])
