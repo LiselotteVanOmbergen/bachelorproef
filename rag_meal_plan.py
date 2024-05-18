@@ -113,14 +113,14 @@ voorbeeld_maaltijdplan = {
         }
     },
     "totale voedingswaarden": {
-        "calorieën": "1510 kcal",
-        "koolhydraten": "125g",
-        "vetten": "79g",
-        "eiwitten": "41g",
-        "vezels": "36g",
-        "ijzer": "10.3mg",
-        "calcium": "150mg",
-        "zink": "6.6mg"
+        "calorieën": "kcal",
+        "koolhydraten": "g",
+        "vetten": "g",
+        "eiwitten": "g",
+        "vezels": "g",
+        "ijzer": "mg",
+        "calcium": "mg",
+        "zink": "mg"
     }
 }
 
