@@ -18,15 +18,22 @@ openai.api_key = os.getenv("OPENAI_API_KEY", st.secrets.get("OPENAI_API_KEY"))
 def generate_motivation():
 
     subjects = [
-        "Gezondheid",
-        "Milieubewustzijn",
-        "Dierenwelzijn",
-        "Duurzaamheid",
-        "Gewichtsbeheersing",
-        "Ethiek",
-        "Voedseldiversiteit",
-        "Klimaatverandering",
-        "Economische rechtvaardigheid"
+        "Milieu",
+        "Broeikasemissies",
+        "Milieuschade",
+        "Watergebruik",
+        "Landgebruik",
+        "Ontbossing",
+        "Volksgezondheid",
+        "Individuele gezondheid",
+        "Cholestorol",
+        "Lichaamsgewicht",
+        "Obesitas",
+        "Luchtvervuiling",
+        "Hart- en vaatziekten",
+        "Diabetes type 2",
+        "Kanker",
+        "Cognitieve functies"
     ]
 
     random_subject = random.choice(subjects)
