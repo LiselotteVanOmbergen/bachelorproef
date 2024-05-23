@@ -26,7 +26,7 @@ def generate_motivation():
         "Ontbossing",
         "Volksgezondheid",
         "Individuele gezondheid",
-        "Cholestorol",
+        "Cholesterol",
         "Lichaamsgewicht",
         "Obesitas",
         "Luchtvervuiling",
